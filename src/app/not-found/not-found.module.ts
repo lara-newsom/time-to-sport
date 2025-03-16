@@ -13,4 +13,4 @@ import { SharedUiModule } from '../shared-ui/shared-ui.module';
     SharedUiModule
   ],
 })
-export class ContactModule { }
+export class NotFoundModule { }

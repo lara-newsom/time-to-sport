@@ -1,0 +1,49 @@
+import { Component } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { BUSINESS_NAME } from 'src/app/constants';
+import { Product } from 'src/app/models/product';
+import { ProductService } from 'src/app/services/product.service';
+
+type SortableKeys = Pick<Product, 'description' | 'title' | 'category' | 'price' >
+
+@Component({
+  selector: 'app-table-view',
+  templateUrl: './table-view.component.html',
+  styleUrls: ['./table-view.component.scss']
+})
+export class TableViewComponent {
+  readonly BUSINESS_NAME = BUSINESS_NAME;
+  constructor(
+    readonly productService: ProductService
+  ){}
+  readonly sortColumnProperty$ = new BehaviorSubject<keyof SortableKeys | undefined>(undefined);
+
+  readonly products = this.sortColumnProperty$.pipe(
+    switchMap((sortColumnProperty) => this.productService.filteredProducts.pipe(
+      map((filteredProducts) => {
+        if(sortColumnProperty && filteredProducts) {
+          return filteredProducts.sort((a, b) => this.compareFn(a, b, sortColumnProperty))
+        }
+        return filteredProducts || [];
+      })
+    ))
+  )
+
+  compareFn(a: Product, b: Product, prop: keyof SortableKeys) {
+    if (a[prop]!.toString() < b[prop]!.toString()) {
+      return -1;
+    } else if (a > b) {
+      return 1;
+    }
+    return 0;
+  }
+  
+  sortColumn(property: keyof SortableKeys){
+    if(this.sortColumnProperty$.getValue() === property) {
+      this.sortColumnProperty$.next(undefined);
+    } else {
+      this.sortColumnProperty$.next(property)
+    }
+  }
+}

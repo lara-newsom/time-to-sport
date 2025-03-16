@@ -1,0 +1,31 @@
+<section
+  aria-label="Products"
+  class="main-content"
+>
+  <ng-container *ngIf="productService.selectedCategory$ | async as selectedCategory">
+    <h2 class="visually-hidden">Products for {{ selectedCategory }} Category</h2>
+  </ng-container>
+  <div class="table-toggle">
+    <mat-slide-toggle
+      [checked]="tableView | async"
+      (toggleChange)="switchView()"
+      color="primary"
+    >Enable Table View</mat-slide-toggle>
+  </div>
+  <ng-container *ngIf="tableView | async; else cardView">
+    <app-table-view></app-table-view>
+  </ng-container>
+  <ng-template #cardView>
+    <div class="category-wrapper">
+      <div class="side-nav-wrapper">
+        <app-side-menu
+          (setTableView)="handleRowSelect($event)"
+        ></app-side-menu>
+      </div>
+      <div class="horizontal-divider"></div>
+      <div id="productDetail" class="detail-wrapper" tabindex="-1">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </ng-template>
+</section>

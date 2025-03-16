@@ -1,0 +1,95 @@
+<app-two-panel-layout
+  ariaLabel="Cart Checkout"
+  ariaLiveSetting="assertive"
+>
+  <img
+    left-wrapper
+    src="../../assets/images/checkout.jpg"
+    alt=""
+    width="463"
+    height="695"
+    priority
+  />
+  <div right-wrapper>
+    <h3 class="cart-header">{{ BUSINESS_NAME }} Shopping Cart</h3>
+    <ng-container *ngIf="submitted && !loading; else cartWrapper">
+      <div class="totals-item">
+        <div class="totals-details-wrapper">
+          <div>Thank you for our order!</div>
+        </div>
+        <div class="totals-details-wrapper">
+          <div>Order# 1664</div>
+        </div>
+        <div class="totals-details-wrapper">
+          <button customBorderButton customButton input="submit" (click)="returnToProducts()">Keep Shopping</button>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #cartWrapper>      
+      <div class="cart-items-wrapper">
+        <ng-container *ngIf="cartItemsPlusQuantity$ | async as cartItems">
+          <ng-container
+            *ngIf="cartItems.length > 0; else emptyCart"
+          >
+            <div *ngFor="let item of cartItems" class="cart-item">
+              <div class="cart-item-image-wrapper">
+                <img [src]="item.thumb" [alt]="item.title" width="100" height="100"/>
+              </div>
+              <h4
+                [attr.aria-label]="item.title + ' quantity in cart: ' + item.quantity "
+                class="cart-item-name"
+              >{{ item.title }}</h4>
+              <app-add-to-cart-button
+                [productId]="item.id"
+                [numberOnly]=true
+              ></app-add-to-cart-button>
+              <p class="cart-item-price">{{ (item.price * (item.quantity || 1)) | currency }}</p>
+            </div>
+          </ng-container>
+        </ng-container>
+        <ng-template #emptyCart>
+          <p class="cart-item-name">You can't play sports without sport things!  
+            <a
+            [routerLink]="['../', ROUTE_TOKENS.products, 'all']">Start Shopping Now!</a>
+          </p>
+        </ng-template>
+      </div>
+      <ng-container *ngIf="cartTotals$ | async as cartTotals">
+        <div class="totals-item">
+          <h4 class="visually-hidden">Cart Total: {{ cartTotals.total | currency }}</h4>
+          <div class="totals-details-wrapper">
+            <div>Subtotal</div>
+            <div>{{ cartTotals.subtotal | currency }}</div>
+          </div>
+          <div class="totals-details-wrapper">
+            <div>Shipping</div>
+            <div>{{ cartTotals.shipping  | currency }}</div>
+          </div>
+          <div class="totals-details-wrapper">
+            <div>Sales Tax</div>
+            <div>{{ cartTotals.salesTax | currency }}</div>
+          </div>
+          <div class="totals-details-wrapper">
+            <div>Total</div>
+            <div>{{ cartTotals.total | currency }}</div>
+          </div>
+          <div class="totals-details-wrapper" aria-live="assertive">
+            <ng-container *ngIf="loading; else loaded">
+              <mat-spinner aria-label="Order Checkout"></mat-spinner>
+              <div>Processing...</div>
+            </ng-container>
+            <ng-template #loaded>
+              <button
+                customBorderButton
+                customButton
+                input="submit"
+                (click)="checkout()"
+                [disabled]="cartTotals.subtotal === 0"
+              >Checkout</button>
+            </ng-template>
+          </div>
+        </div>
+      </ng-container>
+    </ng-template>
+  </div>
+</app-two-panel-layout>

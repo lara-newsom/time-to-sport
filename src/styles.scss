@@ -1,0 +1,81 @@
+// @import '@angular/material/prebuilt-themes/indigo-pink.css';
+:root {
+    // colors
+    --background-light-blue: oklch(97% 0.02 219.41);
+    --background-extra-light-blue: oklch(97% 0.02 219.41 / 39.19%);
+    --background-dark-brown: oklch(30% 0.15 265);
+    --background-medium-brown: oklch(56.62% 0.074 259.94);
+    --font-color: oklch(31.42% 0.011 55.94);
+    --border-color: oklch(31.42% 0.011 55.94 / 30%);
+    --background-medium-blue: oklch(91% 0.11 91);
+    --background-dark-blue: oklch(47.5% 0.1529 37.59);
+    --background-dark-blue-hover: oklch(70.17% 0.149 250.79);
+    --drop-shadow: oklch(20.23% 0.026 27.86);
+    --white: oklch(100% 0 0);
+    --black: oklch(0% 0 0);
+    --border-highlight: oklch(85.4% 0.064 64.83);
+    --error-red: oklch(64.8% 0.21 29.23);
+  
+    // font variables
+    --font-family: Roboto, "Work Sans", sans-serif;
+    --header-text: 2rem;
+    --menu-item: 1.4rem;
+    --subheader-text: 1.6rem;
+    --highlighted-text: 1.4rem;
+    --element-text: 1.2rem;
+    --body-text: 1rem;
+    --small-text: .8rem;
+    --bold-text: 800;
+    --semi-bold-text: 600;
+    --regular-text: 400;
+    --light-text: 200;
+  
+    // border variables
+    --border-width: .2rem;
+    --border-radius: .6rem;
+  }
+  main {
+    margin: auto;
+    max-width: 1500px;
+  }
+  
+  html, body { height: 100%; }
+  body {
+    font-family: var(--font-family);
+    width: auto;
+    margin: 0 auto;
+  }
+  
+  body,
+  section,
+  .main-content {
+    background-color: var(--background-light-blue);
+  }
+  
+  .main-content {
+    max-width: 1500px;
+    margin: 0 auto;
+    min-width: 300px;
+    padding-bottom: 20px;
+  }
+  
+  ul {
+    list-style-type: none;
+  }
+  
+  a {
+    text-decoration: none;
+    color: var(--font-color);
+  }
+  
+  .visually-hidden {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+  }
+  

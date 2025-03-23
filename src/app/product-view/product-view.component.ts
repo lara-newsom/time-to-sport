@@ -12,7 +12,7 @@ import { BehaviorSubject, ReplaySubject } from 'rxjs';
 })
 export class ProductViewComponent implements OnDestroy {
   private readonly destroyed$ = new ReplaySubject<void>(1);
-  tableView = new BehaviorSubject(false);
+  tableView = this.productService.tableView$;
 
   constructor(
     @Inject(LOGGER_TOKEN) private readonly logger: AppLoggerToken,
@@ -20,10 +20,8 @@ export class ProductViewComponent implements OnDestroy {
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute
   ) {
-    console.log('init product comp')
     this.activatedRoute.paramMap.pipe(
       tap((params) => {
-        console.log('in constructor of product view')
         this.productService.setSelectedCategory(params.get('categoryId') || '')
         takeUntil(this.destroyed$)
       })
@@ -42,12 +40,12 @@ export class ProductViewComponent implements OnDestroy {
   }
 
   switchView() {
-    this.tableView.next(!this.tableView.getValue());
+    this.productService.setTableView();
   }
 
   handleRowSelect(event: unknown) {
     this.logger?.log(`showing ${event}`);
-    this.tableView.next(false);
+    this.productService.setTableView(false);
   }
 
   ngOnDestroy(): void {

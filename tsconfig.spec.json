@@ -4,7 +4,9 @@
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
     "types": [
-      "jest"
+      "jest",
+      "node",
+      "@testing-library/jest-dom"
     ]
   },
   "files": [
@@ -12,6 +14,7 @@
   ],
   "include": [
     "src/**/*.spec.ts",
-    "src/**/*.d.ts"
+    "src/**/*.d.ts",
+    "./setup-jest.ts"
   ]
 }

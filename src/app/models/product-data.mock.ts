@@ -11,7 +11,7 @@ export const PRODUCTS: Product[] = [
       'Relive the glory days of tennis with this 1970s inspired tennis brand mustache. It is sure to be a hit!',
     tags: ['unisex', 'tennis', 'costume', 'mustache'],
     category: Category.COSTUMES,
-    id: '1y',
+    id: '1',
   },
   {
     image: '../../assets/images/cropped/2.jpg',
@@ -267,17 +267,6 @@ export const PRODUCTS: Product[] = [
     id: '24',
   },
   {
-    image: '../../assets/images/cropped/25.jpg',
-    thumb: '../../assets/images/thumbs/25.jpg',
-    title: 'Dirty Bike',
-    price: 511.99,
-    description:
-      'For an extra charge we will wash this dirty bike before we ship it to you. Otherwise it comes pre-dirty.',
-    tags: ['dirty', 'mud', 'racing', 'motorcycle', 'bike'],
-    category: Category.SPEED,
-    id: '25',
-  },
-  {
     image: '../../assets/images/cropped/26.jpg',
     thumb: '../../assets/images/thumbs/26.jpg',
     title: 'Fast Red Car',
@@ -288,6 +277,18 @@ export const PRODUCTS: Product[] = [
     category: Category.SPEED,
     id: '26',
   },
+  {
+    image: '../../assets/images/cropped/25.jpg',
+    thumb: '../../assets/images/thumbs/25.jpg',
+    title: 'Dirty Bike',
+    price: 511.99,
+    description:
+      'For an extra charge we will wash this dirty bike before we ship it to you. Otherwise it comes pre-dirty.',
+    tags: ['dirty', 'mud', 'racing', 'motorcycle', 'bike'],
+    category: Category.SPEED,
+    id: '25',
+  },
+
   {
     image: '../../assets/images/cropped/27.jpg',
     thumb: '../../assets/images/thumbs/27.jpg',
@@ -331,17 +332,6 @@ export const PRODUCTS: Product[] = [
     tags: ['golf car', 'tiny car', 'economy', 'electric vehicle', 'kids'],
     category: Category.EQUIPMENT,
     id: '30',
-  },
-  {
-    image: '../../assets/images/cropped/31.jpg',
-    thumb: '../../assets/images/thumbs/31.jpg',
-    title: 'Golf Sticks',
-    price: 43.99,
-    description:
-      'This is a whole collection of different sticks to hit golf balls with! They have different names and shapes. Ask for one by name to impress the other people on the green.',
-    tags: ['golf', 'sticks', 'hitting balls', 'green', 'collection'],
-    category: Category.HITTING_THINGS,
-    id: '31',
   },
   {
     image: '../../assets/images/cropped/32.jpg',
@@ -573,5 +563,16 @@ export const PRODUCTS: Product[] = [
     quantity: 20,
     category: Category.COSTUMES,
     tags: ['American Football', 'costume', 'shoulder pads', 'short pants'],
+  },
+  {
+    image: '../../assets/images/cropped/31.jpg',
+    thumb: '../../assets/images/thumbs/31.jpg',
+    title: 'Golf Sticks',
+    price: 43.99,
+    description:
+      'This is a whole collection of different sticks to hit golf balls with! They have different names and shapes. Ask for one by name to impress the other people on the green.',
+    tags: ['golf', 'sticks', 'hitting balls', 'green', 'collection'],
+    category: Category.HITTING_THINGS,
+    id: '31',
   },
 ];

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BUSINESS_NAME } from 'src/app/constants';
+import { BUSINESS_NAME } from '../../constants';
 
 @Component({
   selector: 'sub-hero-logo',

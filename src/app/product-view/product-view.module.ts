@@ -28,8 +28,4 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
    MatSlideToggleModule,
   ]
 })
-export class ProductViewModule {
-  constructor(){
-    console.log('load product view module')
-  }
- }
+export class ProductViewModule {}

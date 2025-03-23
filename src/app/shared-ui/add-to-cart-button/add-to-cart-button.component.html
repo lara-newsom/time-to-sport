@@ -1,4 +1,7 @@
-<div class="add-to-cart">
+<div 
+  *ngIf="productId$ | async as productId"
+  class="add-to-cart"
+>
   <button
     customButton
     aria-label="Remove one from cart"

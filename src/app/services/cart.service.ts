@@ -8,11 +8,7 @@ import { map, switchMap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CartService {
-  private cartItems = new BehaviorSubject<{[key: string]: { quantity: number }}>({
-    ['cat-costume']: {quantity: 2},
-    ['overalls-puppy']: {quantity: 1},
-    ['hoodie-bulldog']: {quantity: 1},
-  });
+  private cartItems = new BehaviorSubject<{[key: string]: { quantity: number }}>({});
   readonly cartItems$ = this.cartItems.asObservable();
   setCartItems(items: {[key: string]: { quantity: number }}):void {
     this.cartItems.next(items);
@@ -38,17 +34,18 @@ export class CartService {
     
           return acc;
         }, [] as Product[])         
-      })
+      }),
     ))
   )
 
   readonly selectedItemPlusQuantity = this.productService.selectedProduct.pipe(
     switchMap((selectedProduct) => this.cartItems.pipe(
       map((cartItems) => {
-        const id = selectedProduct?.id;
-        return id 
-          ? cartItems[id]?.quantity || 0 
-          :  undefined;
+        const quantity = cartItems[selectedProduct.id]?.quantity || 0 
+        return {
+          ...selectedProduct,
+          quantity
+        }
       })
     )) 
   )
@@ -79,9 +76,9 @@ export class CartService {
       }),
       map((subtotal) => ({
         subtotal,
-        salesTax: subtotal * 0.625,
+        salesTax: subtotal * 0.0625,
         shipping: subtotal * 0.05,
-        total: subtotal + (subtotal * 0.625) + (subtotal * 0.05)
+        total: subtotal + (subtotal * 0.0625) + (subtotal * 0.05)
       }))
     ))
   );

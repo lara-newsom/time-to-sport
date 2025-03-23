@@ -15,11 +15,18 @@ export class ProductService {
     this.selectedCategory.next(category)
   };
 
-  readonly selectedProductId = new BehaviorSubject<string | undefined>(undefined);
-  readonly selectedProductId$ = this.selectedProductId.asObservable();
-  setSelectedProductId(id?: string):void {
-    this.selectedProductId.next(id)
-  };
+  private tableView = new BehaviorSubject(false);
+  readonly tableView$ = this.tableView.asObservable();
+  setTableView(next?: boolean){
+    console.log('set tableview', next)
+    if(next === false) {
+      return this.tableView.next(false);
+    }
+    if(next === true) {
+      return this.tableView.next(true);
+    }
+    this.tableView.next(!this.tableView.getValue());
+  }
 
 
   private readonly products = new BehaviorSubject(PRODUCTS);
@@ -48,29 +55,23 @@ export class ProductService {
         )
       )
     })
-  )
+  );
+  
+  readonly selectedIdFromQueryParams = this.route.queryParamMap.pipe(
+    map((queryParams) => queryParams.get('productId') || undefined),
+    tap(() => this.setTableView(false))
+  );
 
-  readonly selectedProduct = this.selectedProductId.pipe(
+  readonly selectedProduct = this.selectedIdFromQueryParams.pipe(
     switchMap((selectedProductId) => {
-      return this.products.pipe(
-        switchMap((products) => {
-          const selected = products.find((product) => product.id === selectedProductId);
-          return selected ? of(selected) : this.firstInCategory;
+      return this.filteredProducts.pipe(
+        map((products) => {
+          return products.find((product) => product.id === selectedProductId) || products[0];
         })
       )
     })
   );
 
-  readonly firstInCategory = this.filteredProducts.pipe(
-    map((filteredProducts) => filteredProducts ? filteredProducts[0] : undefined
-    )
-  );
-
-  constructor(route: ActivatedRoute){
-    route.queryParamMap.pipe(tap((queryParams) => {
-      if(queryParams.get('productId')) {
-        this.setSelectedProductId(queryParams.get('productId') || '')
-      }
-    })).subscribe()
+  constructor(private readonly route: ActivatedRoute){
   }
 }

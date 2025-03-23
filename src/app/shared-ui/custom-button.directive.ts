@@ -11,6 +11,7 @@ export class CustomButtonDirective {
     this.elementRef.nativeElement.style.padding= '10px';
     this.elementRef.nativeElement.style['min-width'] = '44px';
     this.elementRef.nativeElement.style['min-height'] = '44px';
+    this.elementRef.nativeElement.style['color'] = 'var(--white)';
     this.elementRef.nativeElement.style['font-size'] = 'var(--element-text)';
     this.addBlurStyles();
   }

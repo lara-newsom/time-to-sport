@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
 import { LOGGER_TOKEN } from './tokens/logger-token';
 import { LoggerService } from './services/logger.service';
+import { NotFoundModule } from './not-found/not-found.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { LoggerService } from './services/logger.service';
     NoopAnimationsModule,
     CommonModule,
     HeaderModule,
+    NotFoundModule,
   ],
   bootstrap: [AppComponent],
   providers: [{

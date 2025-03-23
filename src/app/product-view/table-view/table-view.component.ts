@@ -5,7 +5,7 @@ import { BUSINESS_NAME } from 'src/app/constants';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 
-type SortableKeys = Pick<Product, 'description' | 'title' | 'category' | 'price' >
+type SortableKeys = Pick<Product, 'description' | 'title' | 'category' | 'price'  >;
 
 @Component({
   selector: 'app-table-view',
@@ -15,14 +15,14 @@ type SortableKeys = Pick<Product, 'description' | 'title' | 'category' | 'price'
 export class TableViewComponent {
   readonly BUSINESS_NAME = BUSINESS_NAME;
   constructor(
-    readonly productService: ProductService
+    readonly productService: ProductService,
   ){}
-  readonly sortColumnProperty$ = new BehaviorSubject<keyof SortableKeys | undefined>(undefined);
+  readonly sortColumnProperty$ = new BehaviorSubject<keyof SortableKeys | 'none'>('description');
 
   readonly products = this.sortColumnProperty$.pipe(
     switchMap((sortColumnProperty) => this.productService.filteredProducts.pipe(
       map((filteredProducts) => {
-        if(sortColumnProperty && filteredProducts) {
+        if(sortColumnProperty !== 'none' && filteredProducts) {
           return filteredProducts.sort((a, b) => this.compareFn(a, b, sortColumnProperty))
         }
         return filteredProducts || [];
@@ -31,7 +31,7 @@ export class TableViewComponent {
   )
 
   compareFn(a: Product, b: Product, prop: keyof SortableKeys) {
-    if (a[prop]!.toString() < b[prop]!.toString()) {
+    if (a[prop]! < b[prop]!) {
       return -1;
     } else if (a > b) {
       return 1;
@@ -41,7 +41,7 @@ export class TableViewComponent {
   
   sortColumn(property: keyof SortableKeys){
     if(this.sortColumnProperty$.getValue() === property) {
-      this.sortColumnProperty$.next(undefined);
+      this.sortColumnProperty$.next('none');
     } else {
       this.sortColumnProperty$.next(property)
     }

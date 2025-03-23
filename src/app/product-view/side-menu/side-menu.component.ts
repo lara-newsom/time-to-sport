@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { ROUTE_TOKENS } from '../../models/route-tokens';
-import { startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-side-menu',

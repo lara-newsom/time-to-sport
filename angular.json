@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "techorama": {
+    "time-to-sport": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/techorama",
+            "outputPath": "dist/time-to-sport",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "techorama:build:production"
+              "browserTarget": "time-to-sport:build:production"
             },
             "development": {
-              "browserTarget": "techorama:build:development"
+              "browserTarget": "time-to-sport:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "techorama:build"
+            "browserTarget": "time-to-sport:build"
           }
         },
         "lint": {
@@ -98,7 +98,7 @@
       }
     }
   },
-  "defaultProject": "techorama",
+  "defaultProject": "time-to-sport",
   "cli": {
     "defaultCollection": "@angular-eslint/schematics"
   }

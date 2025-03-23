@@ -5,6 +5,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 During the workshop this course will be updated to the current version and we will implement many of the major improvements that have been recently added to the Angular framework.
 
 ## Setting up Your Development Machine
+
 Your machine will need to have node installed, it is recommended to use a Node Version manager like [NVM](https://github.com/nvm-sh/nvm) to help manage node versions between updates. New versions of Angular often have dependencies on newer versions of Node. 
 https://www.freecodecamp.org/news/node-version-manager-nvm-install-guide/
 

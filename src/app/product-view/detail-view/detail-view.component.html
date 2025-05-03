@@ -1,4 +1,4 @@
-<ng-container *ngIf="selectedProduct$ | async as selectedProduct; else selectSomething">
+<ng-container *ngIf="cartService.selectedItemPlusQuantity | async as selectedProduct; else selectSomething">
   <div
     class="detail"
   >

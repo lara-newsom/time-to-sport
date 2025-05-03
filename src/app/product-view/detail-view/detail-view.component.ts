@@ -7,7 +7,6 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./detail-view.component.scss'],
 })
 export class DetailViewComponent {
-  private readonly cartService = inject(CartService);
-  readonly selectedProduct$ = this.cartService.selectedItemPlusQuantity;
+  protected readonly cartService = inject(CartService);
 }
 

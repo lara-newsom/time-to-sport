@@ -10,22 +10,27 @@ export const routes: Routes = [
   },
   {
     path: ROUTE_TOKENS.home,
-    loadChildren: () => import ('./home/home.module').then(m => m.HomeModule)
+    loadChildren: () => import ('./home/home.module').then(m => m.HomeModule),
+    title: 'Time to Sport - Home',
   },
   {
     path: ROUTE_TOKENS.products,
     loadChildren: () => import('./product-view/product-view.module').then(m => m.ProductViewModule),
+    title: 'Time to Sport - Products',
   },
   {
     path: ROUTE_TOKENS.contact,
     loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule),
+    title: 'Time to Sport - Contact',
   },
   {
     path: ROUTE_TOKENS.cart,
     loadChildren: () => import('./cart/cart.module').then(m => m.CartModule),
+    title: 'Time to Sport - Cart',
   },
   {
     path: '**',
     component: NotFoundComponent,
+    title: 'Time to Sport - Not Found',
   },
 ];

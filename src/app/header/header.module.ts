@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './header.component';
-import { CommonModule, NgOptimizedImageModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -13,7 +13,7 @@ import { CommonModule, NgOptimizedImageModule } from '@angular/common';
   imports: [
     RouterModule,
     CommonModule,
-    NgOptimizedImageModule,
+    NgOptimizedImage,
   ],
 })
 export class HeaderModule { }

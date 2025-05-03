@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SideMenuComponent } from './side-menu.component';
 import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImageModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -12,7 +12,8 @@ import { CommonModule } from '@angular/common';
   ],
   imports: [
     RouterModule,
-    CommonModule
+    CommonModule,
+    NgOptimizedImageModule,
   ],
 })
 export class SideMenuModule { }

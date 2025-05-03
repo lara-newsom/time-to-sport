@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ProductViewComponent } from './product-view.component';
 import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImageModule } from '@angular/common';
 import { PRODUCT_VIEW_ROUTES } from './product-view.routes';
 import { SideMenuModule } from './side-menu/side-menu.module';
 import { SharedUiModule } from '../shared-ui/shared-ui.module';
@@ -26,6 +26,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     TableViewModule,
     SharedUiModule,
    MatSlideToggleModule,
+   NgOptimizedImageModule
   ]
 })
 export class ProductViewModule {}

@@ -4,7 +4,7 @@
 >
   <img
     left-wrapper
-    src="../../assets/images/checkout.jpg"
+    ngSrc="../../assets/images/checkout.jpg"
     alt=""
     width="463"
     height="695"
@@ -33,7 +33,7 @@
           >
             <div *ngFor="let item of cartItems" class="cart-item">
               <div class="cart-item-image-wrapper">
-                <img [src]="item.thumb" [alt]="item.title" width="100" height="100"/>
+                <img [ngSrc]="item.thumb" [alt]="item.title" width="100" height="100" priority/>
               </div>
               <h4
                 [attr.aria-label]="item.title + ' quantity in cart: ' + item.quantity "

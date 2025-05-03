@@ -7,7 +7,6 @@ import { ProductService } from '../../services/product.service';
   styleUrls: ['./sub-section.component.scss']
 })
 export class SubSectionComponent {
-  constructor(private readonly productService: ProductService){}
-
+  private readonly productService = inject(ProductService);
   readonly featured = this.productService.homeProducts;
 }

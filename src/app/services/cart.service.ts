@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ProductService } from './product.service';
 import { Product } from '../models/product';
 import { BehaviorSubject } from 'rxjs';
@@ -8,16 +8,9 @@ import { map, switchMap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CartService {
+  private readonly productService = inject(ProductService);
   private cartItems = new BehaviorSubject<{[key: string]: { quantity: number }}>({});
   readonly cartItems$ = this.cartItems.asObservable();
-  setCartItems(items: {[key: string]: { quantity: number }}):void {
-    this.cartItems.next(items);
-  }
-
-    constructor(
-      private readonly productService: ProductService
-    ){}
-
 
   readonly cartItemsPlusQuantity = this.cartItems.pipe(
     switchMap((cartItems) => this.productService.products$.pipe(
@@ -36,7 +29,7 @@ export class CartService {
         }, [] as Product[])         
       }),
     ))
-  )
+  );
 
   readonly selectedItemPlusQuantity = this.productService.selectedProduct.pipe(
     switchMap((selectedProduct) => this.cartItems.pipe(
@@ -48,7 +41,7 @@ export class CartService {
         }
       })
     )) 
-  )
+  );
 
   readonly featuredProductsPlusQuantity = this.cartItems.pipe(
     switchMap((cartItems) => this.productService.homeProducts.pipe(
@@ -59,7 +52,7 @@ export class CartService {
         }))
       })
     ))
-  )
+  );
 
   readonly cartTotals = this.cartItems.pipe(
     switchMap((cartItems) => this.productService.products$.pipe(
@@ -99,6 +92,9 @@ export class CartService {
     ))
   );
 
+  setCartItems(items: {[key: string]: { quantity: number }}):void {
+    this.cartItems.next(items);
+  }
 
   addCartItem (id?: string) {
     if(id){

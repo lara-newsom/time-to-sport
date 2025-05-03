@@ -1,9 +1,9 @@
-import { Component, Inject, OnDestroy } from '@angular/core';
+import { Component, inject, Inject, OnDestroy } from '@angular/core';
 import { ContactForm } from '../models/contact-form';
 import { ContactService  } from '../services/contact.service';
 import { catchError, takeUntil, tap } from 'rxjs/operators';
 import { ReplaySubject } from 'rxjs';
-import { AppLoggerToken, LOGGER_TOKEN } from '../tokens/logger-token';
+import {  LOGGER_TOKEN } from '../tokens/logger-token';
 
 @Component({
   selector: 'app-contact',
@@ -11,10 +11,8 @@ import { AppLoggerToken, LOGGER_TOKEN } from '../tokens/logger-token';
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnDestroy{
-  constructor(
-    @Inject(LOGGER_TOKEN) private readonly logger: AppLoggerToken,
-    private readonly contactService: ContactService
-  ){}
+  private readonly logger = inject(LOGGER_TOKEN);
+  private readonly contactService = inject(ContactService);
 
   model: ContactForm = {
     fullName: '',

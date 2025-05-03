@@ -1,10 +1,9 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { of, ReplaySubject } from 'rxjs';
 import { catchError, takeUntil, tap } from 'rxjs/operators';
 import { ContactForm } from '../models/contact-form';
 import { Router } from '@angular/router';
 import { ROUTE_TOKENS } from '../models/route-tokens';
-
 import { CartService  } from '../services/cart.service';
 import { ContactService  } from '../services/contact.service';
 import { AppLoggerToken, LOGGER_TOKEN } from '../tokens/logger-token';
@@ -16,16 +15,15 @@ import { BUSINESS_NAME } from '../constants';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent {
-  constructor(
-    readonly cartService: CartService,
-    private readonly router: Router,
-    @Inject(LOGGER_TOKEN) private readonly logger: AppLoggerToken,
-    protected readonly contactService: ContactService
-  ){}
-  readonly cartItemsPlusQuantity$ = this.cartService.cartItemsPlusQuantity
+  readonly cartService = inject(CartService);
+  private readonly router = inject(Router);
+  private readonly logger = inject<AppLoggerToken>(LOGGER_TOKEN);
+  protected readonly contactService = inject(ContactService);
+
+  readonly cartItemsPlusQuantity$ = this.cartService.cartItemsPlusQuantity;
   readonly cartTotals$ = this.cartService.cartTotals;
   readonly ROUTE_TOKENS = ROUTE_TOKENS;
-  readonly BUSINESS_NAME= BUSINESS_NAME;
+  readonly BUSINESS_NAME = BUSINESS_NAME;
 
   destroyed$ = new ReplaySubject<void>(1);
 

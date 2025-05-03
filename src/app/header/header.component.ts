@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { LINKS } from '../models/category';
 import { ROUTE_TOKENS } from '../models/route-tokens';
 import { CartService  } from '../services/cart.service';
@@ -11,27 +11,24 @@ import { BUSINESS_NAME } from '../constants';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  readonly BUSINESS_NAME = BUSINESS_NAME;
-  
-  constructor(
-    @Inject(LOGGER_TOKEN) private readonly logger: AppLoggerToken,
-    protected readonly cartService: CartService
-  ){}
+  private readonly logger = inject<AppLoggerToken>(LOGGER_TOKEN);
+  protected readonly cartService = inject(CartService);
 
-  totalItems = this.cartService.totalItems;
-  showMenu = false;
+  readonly BUSINESS_NAME = BUSINESS_NAME;
+  readonly totalItems = this.cartService.totalItems;
   readonly LINKS = LINKS;
   readonly ROUTE_TOKENS = ROUTE_TOKENS;
-
   readonly menuItemOne = 'Menu Item One';
   readonly logoUrl = '../../assets/images/Sport-Logo-Reversed.png';
+  
+  showMenu = false;
 
-  toggleMenu(){
+  toggleMenu() {
     this.showMenu = !this.showMenu;
     this.logger?.log('menu was closed!');
   }
 
-  selectCategory(name: string){
+  selectCategory(name: string) {
     this.showMenu = false;
     this.logger?.log(`${name} was clicked!`);
   }

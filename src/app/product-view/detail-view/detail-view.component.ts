@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 
 @Component({
@@ -7,11 +7,7 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./detail-view.component.scss'],
 })
 export class DetailViewComponent {
-  constructor(
-    private readonly cartService: CartService,
-  ){
-  }
-
+  private readonly cartService = inject(CartService);
   readonly selectedProduct$ = this.cartService.selectedItemPlusQuantity;
 }
 

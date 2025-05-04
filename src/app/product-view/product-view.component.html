@@ -7,12 +7,12 @@
   </ng-container>
   <div class="table-toggle">
     <mat-slide-toggle
-      [checked]="tableView | async"
+      [checked]="productService.tableView()"
       (toggleChange)="switchView()"
       color="primary"
     >Enable Table View</mat-slide-toggle>
   </div>
-  <ng-container *ngIf="tableView | async; else cardView">
+  <ng-container *ngIf="productService.tableView(); else cardView">
     <app-table-view />
   </ng-container>
   <ng-template #cardView>

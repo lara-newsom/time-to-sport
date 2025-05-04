@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { Category } from '../models/category';
 import { BehaviorSubject, of } from 'rxjs';
 import { map, switchMap, tap} from'rxjs/operators';
@@ -16,19 +16,16 @@ export class ProductService {
     this.selectedCategory.next(category)
   };
 
-  private tableView = new BehaviorSubject(false);
-  readonly tableView$ = this.tableView.asObservable();
-  setTableView(next?: boolean){
-    console.log('set tableview', next)
-    if(next === false) {
-      return this.tableView.next(false);
+  readonly tableView = signal<boolean>(false);
+  setTableView(next?: boolean) {
+    if (next === false) {
+      return this.tableView.set(false);
     }
-    if(next === true) {
-      return this.tableView.next(true);
+    if (next === true) {
+      return this.tableView.set(true);
     }
-    this.tableView.next(!this.tableView.getValue());
+    this.tableView.set(!this.tableView());
   }
-
 
   private readonly products = new BehaviorSubject(PRODUCTS);
   readonly products$ = this.products.asObservable();

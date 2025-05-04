@@ -3,7 +3,7 @@ import { ProductService } from '../services/product.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, takeUntil, tap } from 'rxjs/operators';
 import { AppLoggerToken, LOGGER_TOKEN } from '../tokens/logger-token';
-import { BehaviorSubject, ReplaySubject } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 
 @Component({
   selector: 'app-product-view',
@@ -16,7 +16,6 @@ export class ProductViewComponent implements OnDestroy {
   private readonly router = inject(Router);
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly destroyed$ = new ReplaySubject<void>(1);
-  tableView = this.productService.tableView$;
 
   constructor() {
     this.activatedRoute.paramMap.pipe(

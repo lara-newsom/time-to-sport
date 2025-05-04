@@ -2,7 +2,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import {render, screen} from '@testing-library/angular';
 import { BUSINESS_NAME } from './constants';
-import { HeaderModule } from './header/header.module';
+import { HeaderComponent } from './header/header.component';
 
 describe('AppComponent', () => {
 
@@ -10,7 +10,7 @@ describe('AppComponent', () => {
     const {fixture} = await render(AppComponent, {
       imports: [
         RouterTestingModule,
-        HeaderModule,
+        HeaderComponent,
       ]
     });
     return {

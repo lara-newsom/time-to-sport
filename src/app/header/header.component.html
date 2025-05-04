@@ -78,9 +78,7 @@
           queryParamsHandling="merge"
           class="menu-option"
         >
-        <ng-container *ngIf="totalItems | async as totalItems">
-          <span class="total-items">{{ totalItems }}</span>
-        </ng-container>
+        <span class="total-items">{{ totalItems() }}</span>
         <img
           ngSrc="../../assets/images/cart-icon.png"
           alt="Shopping Cart"

@@ -8,16 +8,19 @@ import { CartService  } from '../services/cart.service';
 import { ContactService  } from '../services/contact.service';
 import { AppLoggerToken, LOGGER_TOKEN } from '../tokens/logger-token';
 import { BUSINESS_NAME } from '../constants';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CurrencyPipe, NgFor, NgIf, NgOptimizedImage } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SharedUiModule } from '../shared-ui/shared-ui.module';
 import { CustomBorderButtonDirective } from '../shared-ui/custom-border-button.directive';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   standalone: true,
   imports: [
-      CommonModule,
+      NgFor,
+      NgIf,
+      CurrencyPipe,
       FormsModule,
       SharedUiModule,
       MatProgressSpinnerModule,
@@ -35,8 +38,8 @@ export class CartComponent {
   private readonly logger = inject<AppLoggerToken>(LOGGER_TOKEN);
   protected readonly contactService = inject(ContactService);
 
-  readonly cartItemsPlusQuantity$ = this.cartService.cartItemsPlusQuantity;
-  readonly cartTotals$ = this.cartService.cartTotals;
+  readonly cartItemsPlusQuantity = toSignal(this.cartService.cartItemsPlusQuantity);
+  readonly cartTotals = toSignal(this.cartService.cartTotals);
   readonly ROUTE_TOKENS = ROUTE_TOKENS;
   readonly BUSINESS_NAME = BUSINESS_NAME;
 

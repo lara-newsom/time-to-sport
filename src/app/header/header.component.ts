@@ -4,8 +4,19 @@ import { ROUTE_TOKENS } from '../models/route-tokens';
 import { CartService  } from '../services/cart.service';
 import { AppLoggerToken, LOGGER_TOKEN } from '../tokens/logger-token';
 import { BUSINESS_NAME } from '../constants';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { NgFor, NgIf, NgOptimizedImage } from '@angular/common';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
+  standalone: true,
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    NgFor,
+    NgIf,
+    NgOptimizedImage,
+  ],
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
@@ -15,7 +26,7 @@ export class HeaderComponent {
   protected readonly cartService = inject(CartService);
 
   readonly BUSINESS_NAME = BUSINESS_NAME;
-  readonly totalItems = this.cartService.totalItems;
+  readonly totalItems = toSignal(this.cartService.totalItems);
   readonly LINKS = LINKS;
   readonly ROUTE_TOKENS = ROUTE_TOKENS;
   readonly menuItemOne = 'Menu Item One';

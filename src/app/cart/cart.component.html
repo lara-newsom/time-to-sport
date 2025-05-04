@@ -27,7 +27,7 @@
     </ng-container>
     <ng-template #cartWrapper>      
       <div class="cart-items-wrapper">
-        <ng-container *ngIf="cartItemsPlusQuantity$ | async as cartItems">
+        <ng-container *ngIf="cartItemsPlusQuantity() as cartItems">
           <ng-container
             *ngIf="cartItems.length > 0; else emptyCart"
           >
@@ -54,7 +54,7 @@
           </p>
         </ng-template>
       </div>
-      <ng-container *ngIf="cartTotals$ | async as cartTotals">
+      <ng-container *ngIf="cartTotals() as cartTotals">
         <div class="totals-item">
           <h4 class="visually-hidden">Cart Total: {{ cartTotals.total | currency }}</h4>
           <div class="totals-details-wrapper">

@@ -6,6 +6,7 @@ import { SharedUiModule } from '../shared-ui/shared-ui.module';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Route, RouterModule } from '@angular/router';
 import { TwoPanelLayoutModule } from '../shared-ui/two-panel-layout/two-panel-layout.module';
+import { CustomBorderButtonDirective } from '../shared-ui/custom-border-button.directive';
 
 export const CONTACT_ROUTES: Route[] = [
   {
@@ -25,6 +26,7 @@ export const CONTACT_ROUTES: Route[] = [
     CommonModule,
     FormsModule,
     SharedUiModule,
+    CustomBorderButtonDirective,
     MatProgressSpinnerModule,
     TwoPanelLayoutModule,
     RouterModule.forChild(CONTACT_ROUTES),

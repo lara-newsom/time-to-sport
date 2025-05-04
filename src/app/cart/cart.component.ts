@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { of, ReplaySubject } from 'rxjs';
 import { catchError, takeUntil, tap } from 'rxjs/operators';
 import { ContactForm } from '../models/contact-form';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ROUTE_TOKENS } from '../models/route-tokens';
 import { CartService  } from '../services/cart.service';
 import { ContactService  } from '../services/contact.service';
@@ -12,6 +12,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SharedUiModule } from '../shared-ui/shared-ui.module';
+import { CustomBorderButtonDirective } from '../shared-ui/custom-border-button.directive';
 
 @Component({
   standalone: true,
@@ -21,6 +22,8 @@ import { SharedUiModule } from '../shared-ui/shared-ui.module';
       SharedUiModule,
       MatProgressSpinnerModule,
       NgOptimizedImage,
+      CustomBorderButtonDirective,
+      RouterLink
   ],
   selector: 'app-cart',
   templateUrl: './cart.component.html',

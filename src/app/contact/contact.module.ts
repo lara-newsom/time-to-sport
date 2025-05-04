@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatLegacyProgressSpinnerModule as MatProgressSpinnerModule } from '@angular/material/legacy-progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ContactComponent } from './contact.component';
 import { SharedUiModule } from '../shared-ui/shared-ui.module';
 import { CommonModule, NgOptimizedImage } from '@angular/common';

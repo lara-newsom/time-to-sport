@@ -7,8 +7,7 @@ import { SideMenuModule } from './side-menu/side-menu.module';
 import { SharedUiModule } from '../shared-ui/shared-ui.module';
 import { DetailViewComponent } from './detail-view/detail-view.component';
 import { TableViewModule } from './table-view/table-view.module';
-import {MatLegacySlideToggleModule as MatSlideToggleModule} from '@angular/material/legacy-slide-toggle';
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [

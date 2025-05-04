@@ -41,7 +41,7 @@ export class CartService {
   readonly selectedItemPlusQuantity = this.productService.selectedProduct.pipe(
     switchMap((selectedProduct) => this.cartItems.pipe(
       map((cartItems) => {
-        const quantity = cartItems[selectedProduct.id]?.quantity || 0 
+        const quantity = cartItems[selectedProduct?.id]?.quantity || 0 
         return {
           ...selectedProduct,
           quantity

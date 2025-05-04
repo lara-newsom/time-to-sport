@@ -2,14 +2,27 @@ import { Component, inject } from '@angular/core';
 import { of, ReplaySubject } from 'rxjs';
 import { catchError, takeUntil, tap } from 'rxjs/operators';
 import { ContactForm } from '../models/contact-form';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ROUTE_TOKENS } from '../models/route-tokens';
 import { CartService  } from '../services/cart.service';
 import { ContactService  } from '../services/contact.service';
 import { AppLoggerToken, LOGGER_TOKEN } from '../tokens/logger-token';
 import { BUSINESS_NAME } from '../constants';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SharedUiModule } from '../shared-ui/shared-ui.module';
+import { CART_ROUTES } from './cart.routes';
 
 @Component({
+  standalone: true,
+  imports: [
+      CommonModule,
+      FormsModule,
+      SharedUiModule,
+      MatProgressSpinnerModule,
+      NgOptimizedImage,
+  ],
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']

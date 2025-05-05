@@ -1,9 +1,9 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, input, inject, computed } from '@angular/core';
 import { CartService  } from '../../services/cart.service';
-import { map, switchMap } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
 import { CustomButtonDirective } from '../custom-button.directive';
-import { AsyncPipe } from '@angular/common';
+import { toSignal } from '@angular/core/rxjs-interop';
+
+type CartItems = { [key: string]: { quantity: number } };
 
 @Component({
     selector: 'app-add-to-cart-button',
@@ -11,18 +11,33 @@ import { AsyncPipe } from '@angular/common';
     styleUrls: ['./add-to-cart-button.component.scss'],
     standalone: true,
     imports: [
-    CustomButtonDirective,
-    AsyncPipe
-],
+        CustomButtonDirective
+    ],
 })
 export class AddToCartButtonComponent {
   private readonly cartService = inject(CartService);
-  productId$ = new BehaviorSubject('');
+  productId = input.required<string>();
+  numberOnly = input<boolean>(false);
   
-  @Input() set productId(val: string) {
-    this.productId$.next(val);
-  }
-  @Input() numberOnly: boolean = false;
+  private readonly cartItems = toSignal(this.cartService.cartItems$);
+
+  readonly addToCartMessage = computed(() => {
+    const items = this.cartItems() ?? {};
+    const total = items[this.productId()]?.quantity ?? 0;
+    return items[this.productId()]?.quantity ? `Add one to the ${total} in the cart` : 'Add one to cart';
+  });
+
+  readonly buttonMessage = computed(() => {
+    const items = this.cartItems() ?? {};
+    const total = items[this.productId()]?.quantity ?? 0;
+
+    if(this.numberOnly()) {
+      return total ? total : 0;
+    }
+    return total
+      ? `${total} in cart`
+      : 'Add to cart';
+  });
 
   addToCart(productId: string): void {
     this.cartService.addCartItem(productId);
@@ -31,29 +46,4 @@ export class AddToCartButtonComponent {
   decrementFromCart(productId: string): void {
     this.cartService.decrementCartItem(productId);
   }
-
-  readonly addToCartMessage = this.cartService.cartItems$.pipe(
-    switchMap((cartItems) => this.productId$.pipe(
-      map((productId) => {
-        const total = cartItems[productId]?.quantity || 0;
-  
-        return total ? `Add one to the ${total} in the cart`
-        : 'Add one to cart';
-      }))
-    ));
-
-  readonly buttonMessage = this.cartService.cartItems$.pipe(
-    switchMap((cartItems) => this.productId$.pipe(
-      map((productId) => {
-        const total = cartItems[productId]?.quantity || 0;
-  
-        if(this.numberOnly){
-          return total ? total : 0;
-        }
-        return total
-          ? `${total} in cart`
-          : 'Add to cart';
-      })
-    ))
-  );
 }

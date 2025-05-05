@@ -10,22 +10,20 @@ import { TableViewModule } from './table-view/table-view.module';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
-  declarations: [
-    ProductViewComponent,
-  ],
-  exports: [
-    ProductViewComponent,
-    DetailViewComponent,
-  ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(PRODUCT_VIEW_ROUTES),
-    SideMenuModule,
-    TableViewModule,
-    SharedUiModule,
-    DetailViewComponent,
-   MatSlideToggleModule,
-   NgOptimizedImage
-  ]
+    exports: [
+        ProductViewComponent,
+        DetailViewComponent,
+    ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(PRODUCT_VIEW_ROUTES),
+        SideMenuModule,
+        TableViewModule,
+        SharedUiModule,
+        DetailViewComponent,
+        MatSlideToggleModule,
+        NgOptimizedImage,
+        ProductViewComponent
+    ]
 })
 export class ProductViewModule {}

@@ -1,14 +1,27 @@
 import { Component, inject, Input, OnDestroy } from '@angular/core';
 import { ProductService } from '../services/product.service';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter, takeUntil, tap } from 'rxjs/operators';
 import { AppLoggerToken, LOGGER_TOKEN } from '../tokens/logger-token';
 import { ReplaySubject } from 'rxjs';
+import { SideMenuComponent } from './side-menu/side-menu.component';
+import { TableViewComponent } from './table-view/table-view.component';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { NgIf, AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-product-view',
-  templateUrl: './product-view.component.html',
-  styleUrls: ['./product-view.component.scss'],
+    selector: 'app-product-view',
+    templateUrl: './product-view.component.html',
+    styleUrls: ['./product-view.component.scss'],
+    standalone: true,
+    imports: [
+        NgIf,
+        MatSlideToggle,
+        TableViewComponent,
+        SideMenuComponent,
+        RouterOutlet,
+        AsyncPipe,
+    ],
 })
 export class ProductViewComponent implements OnDestroy {
   private readonly logger = inject<AppLoggerToken>(LOGGER_TOKEN);

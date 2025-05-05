@@ -5,16 +5,14 @@ import { AddToCartButtonComponent } from './add-to-cart-button.component';
 import { CustomButtonDirective } from '../custom-button.directive';
 
 @NgModule({
-    declarations: [
-      AddToCartButtonComponent,
-    ],
     exports: [
-      AddToCartButtonComponent,
+        AddToCartButtonComponent,
     ],
     imports: [
-      RouterModule,
-      CommonModule,
-      CustomButtonDirective
+        RouterModule,
+        CommonModule,
+        CustomButtonDirective,
+        AddToCartButtonComponent
     ],
 })
 export class AddToCartButtonModule { }

@@ -4,13 +4,17 @@ import { map, switchMap } from 'rxjs/operators';
 import { BUSINESS_NAME } from 'src/app/constants';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
+import { AddToCartButtonComponent } from '../../shared-ui/add-to-cart-button/add-to-cart-button.component';
+import { NgIf, NgFor, NgOptimizedImage, AsyncPipe, UpperCasePipe, CurrencyPipe } from '@angular/common';
 
 type SortableKeys = Pick<Product, 'description' | 'title' | 'category' | 'price'  >;
 
 @Component({
-  selector: 'app-table-view',
-  templateUrl: './table-view.component.html',
-  styleUrls: ['./table-view.component.scss']
+    selector: 'app-table-view',
+    templateUrl: './table-view.component.html',
+    styleUrls: ['./table-view.component.scss'],
+    standalone: true,
+    imports: [NgIf, NgFor, AddToCartButtonComponent, NgOptimizedImage, AsyncPipe, UpperCasePipe, CurrencyPipe]
 })
 export class TableViewComponent {
   readonly BUSINESS_NAME = BUSINESS_NAME;

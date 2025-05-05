@@ -5,16 +5,14 @@ import { CommonModule } from '@angular/common';
 import { CardModule } from '../card/card.module';
 
 @NgModule({
-    declarations: [
-      SubSectionComponent
-    ],
     exports: [
-      SubSectionComponent
+        SubSectionComponent
     ],
     imports: [
-      CardModule,
-      RouterModule,
-      CommonModule,
+        CardModule,
+        RouterModule,
+        CommonModule,
+        SubSectionComponent,
     ],
 })
 export class SubSectionModule { }

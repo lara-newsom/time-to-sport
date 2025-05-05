@@ -3,15 +3,13 @@ import { SubHeroLogoComponent } from './sub-hero-logo.component';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    NgOptimizedImage,
-  ],
-  declarations: [
-    SubHeroLogoComponent,
-  ],
-  exports: [
-    SubHeroLogoComponent,
-  ],
+    imports: [
+        CommonModule,
+        NgOptimizedImage,
+        SubHeroLogoComponent,
+    ],
+    exports: [
+        SubHeroLogoComponent,
+    ],
 })
 export class SubHeroLogoModule { }

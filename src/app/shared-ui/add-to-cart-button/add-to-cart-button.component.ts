@@ -2,11 +2,19 @@ import { Component, Input, inject } from '@angular/core';
 import { CartService  } from '../../services/cart.service';
 import { map, switchMap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
+import { CustomButtonDirective } from '../custom-button.directive';
+import { NgIf, AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-add-to-cart-button',
-  templateUrl: './add-to-cart-button.component.html',
-  styleUrls: ['./add-to-cart-button.component.scss'],
+    selector: 'app-add-to-cart-button',
+    templateUrl: './add-to-cart-button.component.html',
+    styleUrls: ['./add-to-cart-button.component.scss'],
+    standalone: true,
+    imports: [
+        NgIf,
+        CustomButtonDirective,
+        AsyncPipe,
+    ],
 })
 export class AddToCartButtonComponent {
   private readonly cartService = inject(CartService);

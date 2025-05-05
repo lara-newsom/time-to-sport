@@ -16,23 +16,20 @@ export const CONTACT_ROUTES: Route[] = [
 ]
 
 @NgModule({
-  declarations: [
-    ContactComponent
-  ],
-  exports: [
-    ContactComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    SharedUiModule,
-    CustomBorderButtonDirective,
-    MatProgressSpinnerModule,
-    TwoPanelLayoutModule,
-    RouterModule.forChild(CONTACT_ROUTES),
-    NgOptimizedImage
-  ],
-  providers: [
-  ],
+    exports: [
+        ContactComponent
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        SharedUiModule,
+        CustomBorderButtonDirective,
+        MatProgressSpinnerModule,
+        TwoPanelLayoutModule,
+        RouterModule.forChild(CONTACT_ROUTES),
+        NgOptimizedImage,
+        ContactComponent
+    ],
+    providers: [],
 })
 export class ContactModule { }

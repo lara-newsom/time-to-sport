@@ -5,12 +5,9 @@ import { SharedUiModule } from 'src/app/shared-ui/shared-ui.module';
 
 
 @NgModule({
-  declarations: [
-    TableViewComponent
-  ],
-  exports: [
-    TableViewComponent
-  ],
-  imports: [CommonModule, SharedUiModule, NgOptimizedImage],
+    exports: [
+        TableViewComponent
+    ],
+    imports: [CommonModule, SharedUiModule, NgOptimizedImage, TableViewComponent],
 })
 export class TableViewModule { }

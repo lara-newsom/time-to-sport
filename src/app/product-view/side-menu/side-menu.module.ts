@@ -4,16 +4,14 @@ import { RouterModule } from '@angular/router';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 
 @NgModule({
-  declarations: [
-    SideMenuComponent
-  ],
-  exports: [
-    SideMenuComponent
-  ],
-  imports: [
-    RouterModule,
-    CommonModule,
-    NgOptimizedImage,
-  ],
+    exports: [
+        SideMenuComponent
+    ],
+    imports: [
+        RouterModule,
+        CommonModule,
+        NgOptimizedImage,
+        SideMenuComponent,
+    ],
 })
 export class SideMenuModule { }

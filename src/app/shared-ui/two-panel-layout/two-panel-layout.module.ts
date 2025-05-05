@@ -3,14 +3,12 @@ import { TwoPanelLayoutComponent } from './two-panel-layout.component';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
-  declarations: [
-    TwoPanelLayoutComponent
-  ],
-  exports: [
-    TwoPanelLayoutComponent
-  ],
-  imports: [
-    CommonModule
-  ]
+    exports: [
+        TwoPanelLayoutComponent
+    ],
+    imports: [
+        CommonModule,
+        TwoPanelLayoutComponent
+    ]
 })
 export class TwoPanelLayoutModule { }

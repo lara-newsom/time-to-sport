@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
 import { LOGGER_TOKEN } from './tokens/logger-token';
 import { LoggerService } from './services/logger.service';
-import { NotFoundModule } from './not-found/not-found.module';
+
 import { HeaderComponent } from './header/header.component';
 
 @NgModule({
@@ -22,8 +22,7 @@ import { HeaderComponent } from './header/header.component';
     BrowserAnimationsModule,
     CommonModule,
     HeaderComponent,
-    NotFoundModule,
-  ],
+],
   bootstrap: [AppComponent],
   providers: [{
     provide: LOGGER_TOKEN,

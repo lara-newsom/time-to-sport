@@ -11,23 +11,26 @@ import { BUSINESS_NAME } from '../constants';
 import { CurrencyPipe, NgFor, NgIf, NgOptimizedImage } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { SharedUiModule } from '../shared-ui/shared-ui.module';
+
 import { CustomBorderButtonDirective } from '../shared-ui/custom-border-button.directive';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { AddToCartButtonComponent } from '../shared-ui/add-to-cart-button/add-to-cart-button.component';
+import { TwoPanelLayoutComponent } from '../shared-ui/two-panel-layout/two-panel-layout.component';
 
 @Component({
   standalone: true,
   imports: [
-      NgFor,
-      NgIf,
-      CurrencyPipe,
-      FormsModule,
-      SharedUiModule,
-      MatProgressSpinnerModule,
-      NgOptimizedImage,
-      CustomBorderButtonDirective,
-      RouterLink
-  ],
+    NgFor,
+    NgIf,
+    CurrencyPipe,
+    FormsModule,
+    MatProgressSpinnerModule,
+    NgOptimizedImage,
+    CustomBorderButtonDirective,
+    RouterLink,
+    AddToCartButtonComponent,
+    TwoPanelLayoutComponent
+],
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']

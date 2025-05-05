@@ -1,32 +1,40 @@
-import { Component, inject, Inject, OnDestroy } from '@angular/core';
-import { ContactForm } from '../models/contact-form';
-import { ContactService  } from '../services/contact.service';
-import { catchError, takeUntil, tap } from 'rxjs/operators';
-import { ReplaySubject } from 'rxjs';
-import {  LOGGER_TOKEN } from '../tokens/logger-token';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { CustomBorderButtonDirective } from '../shared-ui/custom-border-button.directive';
-import { CustomButtonDirective } from '../shared-ui/custom-button.directive';
-import { FormsModule } from '@angular/forms';
-import { NgOptimizedImage, NgIf } from '@angular/common';
-import { TwoPanelLayoutComponent } from '../shared-ui/two-panel-layout/two-panel-layout.component';
+import { Component, inject, Inject, OnDestroy } from "@angular/core";
+import { ContactForm } from "../models/contact-form";
+import { ContactService } from "../services/contact.service";
+import { catchError, takeUntil, tap } from "rxjs/operators";
+import { ReplaySubject } from "rxjs";
+import { LOGGER_TOKEN } from "../tokens/logger-token";
+import { MatProgressSpinner } from "@angular/material/progress-spinner";
+import { CustomBorderButtonDirective } from "../shared-ui/custom-border-button.directive";
+import { CustomButtonDirective } from "../shared-ui/custom-button.directive";
+import { FormsModule } from "@angular/forms";
+import { NgOptimizedImage, NgIf } from "@angular/common";
+import { TwoPanelLayoutComponent } from "../shared-ui/two-panel-layout/two-panel-layout.component";
 
 @Component({
-    selector: 'app-contact',
-    templateUrl: './contact.component.html',
-    styleUrls: ['./contact.component.scss'],
-    standalone: true,
-    imports: [TwoPanelLayoutComponent, NgOptimizedImage, NgIf, FormsModule, CustomButtonDirective, CustomBorderButtonDirective, MatProgressSpinner]
+  selector: "app-contact",
+  templateUrl: "./contact.component.html",
+  styleUrls: ["./contact.component.scss"],
+  standalone: true,
+  imports: [
+    TwoPanelLayoutComponent,
+    NgOptimizedImage,
+    NgIf,
+    FormsModule,
+    CustomButtonDirective,
+    CustomBorderButtonDirective,
+    MatProgressSpinner,
+  ],
 })
-export class ContactComponent implements OnDestroy{
+export class ContactComponent implements OnDestroy {
   private readonly logger = inject(LOGGER_TOKEN);
   private readonly contactService = inject(ContactService);
 
   model: ContactForm = {
-    fullName: '',
-    email: '',
-    phone: '',
-    comment: '',
+    fullName: "",
+    email: "",
+    phone: "",
+    comment: "",
   };
 
   submitted = false;
@@ -38,31 +46,38 @@ export class ContactComponent implements OnDestroy{
     this.submitted = true;
     this.loading = true;
 
-    this.contactService.submitContactForm(model).pipe(
-      tap(() => {
-        this.loading = false;
-        this.logger?.log(`Contact form submitted with ${JSON.stringify(model)}`);
-      }),
-      catchError((error) => {
-        this.logger?.error(`Contact errored with ${JSON.stringify(this.model)}`);
-        return error;
-      }),
-      takeUntil(this.destroyed$)
-    ).subscribe();
+    this.contactService
+      .submitContactForm(model)
+      .pipe(
+        tap(() => {
+          this.loading = false;
+          this.logger?.log(
+            `Contact form submitted with ${JSON.stringify(model)}`
+          );
+        }),
+        catchError((error) => {
+          this.logger?.error(
+            `Contact errored with ${JSON.stringify(this.model)}`
+          );
+          return error;
+        }),
+        takeUntil(this.destroyed$)
+      )
+      .subscribe();
   }
 
   clearForm() {
     this.model = {
-      fullName: '',
-      email: '',
-      phone: '',
-      comment: '',
+      fullName: "",
+      email: "",
+      phone: "",
+      comment: "",
     };
     this.submitted = false;
   }
 
   ngOnDestroy(): void {
-      this.destroyed$.next();
-      this.destroyed$.complete();
+    this.destroyed$.next();
+    this.destroyed$.complete();
   }
 }

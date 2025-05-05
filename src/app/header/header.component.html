@@ -2,7 +2,7 @@
   <a
     class="home-logo"
     [routerLink]="['/' + ROUTE_TOKENS.home]"
-  ><img
+    ><img
     [alt]="'Home - ' + BUSINESS_NAME"
     [ngSrc]="logoUrl"
     width="300"
@@ -11,7 +11,7 @@
   /></a>
   <nav
     aria-label="Main"
-  >
+    >
     <ul>
       <li>
         <a
@@ -23,69 +23,69 @@
       </li>
       <li
         routerLinkActive="selected-item"
-      >
+        >
         <button
           role="link"
           (click)="toggleMenu()"
           (keydown.escape)="selectCategory('none')"
           class="menu-option"
           [attr.aria-expanded]="showMenu"
-        >Products
+          >Products
           <span
             [class.rotated-arrow-icon]="showMenu"
             class="arrow-icon"
           ></span></button>
-        <ul
-          [class.show-submenu]="showMenu"
-          class="collapsible-content"
-        >
-        <ng-container *ngIf="showMenu; else collapseMenu">
-          <li
-            *ngFor="let link of LINKS"
-            class="content-inner"
-            routerLinkActive="selected-sub-item"
-            ariaCurrentWhenActive="page"
-          >
-            <a
-              class="link"
-              [routerLink]="['/' + ROUTE_TOKENS.products, link.category]"
-              [queryParams]="{ productId: link.firstProduct }"
-              (click)="selectCategory(link.category)"
-              (keydown.escape)="selectCategory('none')"
+          <ul
+            [class.show-submenu]="showMenu"
+            class="collapsible-content"
             >
-              {{ link.description }}
-            </a>
+            @if (showMenu) {
+              @for (link of LINKS; track link) {
+                <li
+                  class="content-inner"
+                  routerLinkActive="selected-sub-item"
+                  ariaCurrentWhenActive="page"
+                  >
+                  <a
+                    class="link"
+                    [routerLink]="['/' + ROUTE_TOKENS.products, link.category]"
+                    [queryParams]="{ productId: link.firstProduct }"
+                    (click)="selectCategory(link.category)"
+                    (keydown.escape)="selectCategory('none')"
+                    >
+                    {{ link.description }}
+                  </a>
+                </li>
+              }
+            } @else {
+              <li [routerLink]="['/' + ROUTE_TOKENS.products]" tabindex="-1"></li>
+            }
+          </ul>
+        </li>
+        <li>
+          <a
+            [routerLink]="[ '/' + ROUTE_TOKENS.contact]"
+            routerLinkActive="selected-item"
+            ariaCurrentWhenActive="page"
+            class="menu-option"
+          >Contact</a>
+        </li>
+        <li>
+          <a
+            [routerLink]="[ '/' + ROUTE_TOKENS.cart]"
+            routerLinkActive="selected-item"
+            ariaCurrentWhenActive="page"
+            queryParamsHandling="merge"
+            class="menu-option"
+            >
+            <span class="total-items">{{ totalItems() }}</span>
+            <img
+              ngSrc="../../assets/images/cart-icon.png"
+              alt="Shopping Cart"
+              width="24"
+              height="20"
+            /></a>
           </li>
-        </ng-container>
-        <ng-template #collapseMenu>
-          <li [routerLink]="['/' + ROUTE_TOKENS.products]" tabindex="-1"></li>
-        </ng-template>
         </ul>
-      </li>
-      <li>
-        <a
-          [routerLink]="[ '/' + ROUTE_TOKENS.contact]"
-          routerLinkActive="selected-item"
-          ariaCurrentWhenActive="page"
-          class="menu-option"
-        >Contact</a>
-      </li>
-      <li>
-        <a
-          [routerLink]="[ '/' + ROUTE_TOKENS.cart]"
-          routerLinkActive="selected-item"
-          ariaCurrentWhenActive="page"
-          queryParamsHandling="merge"
-          class="menu-option"
-        >
-        <span class="total-items">{{ totalItems() }}</span>
-        <img
-          ngSrc="../../assets/images/cart-icon.png"
-          alt="Shopping Cart"
-          width="24"
-          height="20"
-        /></a>
-      </li>
-    </ul>
-  </nav>
-</header>
+      </nav>
+    </header>

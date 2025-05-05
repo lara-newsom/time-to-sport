@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { ROUTE_TOKENS } from '../../models/route-tokens';
 import { RouterLinkActive, RouterLink } from '@angular/router';
-import { NgFor, NgOptimizedImage, AsyncPipe } from '@angular/common';
+import { NgOptimizedImage, AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-side-menu',
@@ -10,12 +10,11 @@ import { NgFor, NgOptimizedImage, AsyncPipe } from '@angular/common';
     styleUrls: ['./side-menu.component.scss'],
     standalone: true,
     imports: [
-        NgFor,
-        RouterLinkActive,
-        RouterLink,
-        NgOptimizedImage,
-        AsyncPipe,
-    ],
+    RouterLinkActive,
+    RouterLink,
+    NgOptimizedImage,
+    AsyncPipe
+],
 })
 export class SideMenuComponent {
   private readonly productService = inject(ProductService);

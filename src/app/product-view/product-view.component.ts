@@ -7,7 +7,7 @@ import { ReplaySubject } from 'rxjs';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { TableViewComponent } from './table-view/table-view.component';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-product-view',
@@ -15,13 +15,12 @@ import { NgIf, AsyncPipe } from '@angular/common';
     styleUrls: ['./product-view.component.scss'],
     standalone: true,
     imports: [
-        NgIf,
-        MatSlideToggle,
-        TableViewComponent,
-        SideMenuComponent,
-        RouterOutlet,
-        AsyncPipe,
-    ],
+    MatSlideToggle,
+    TableViewComponent,
+    SideMenuComponent,
+    RouterOutlet,
+    AsyncPipe
+],
 })
 export class ProductViewComponent implements OnDestroy {
   private readonly logger = inject<AppLoggerToken>(LOGGER_TOKEN);

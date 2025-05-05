@@ -1,12 +1,12 @@
 <section
   aria-label="Featured Products"
->
+  >
   <h2 class="visually-hidden">Featured Products</h2>
   <div class="sub-section">
-    <ng-container *ngFor="let product of featured | async">
+    @for (product of featured | async; track product) {
       <app-card
         [product]="product"
-      />
-    </ng-container>
+        />
+    }
   </div>
 </section>

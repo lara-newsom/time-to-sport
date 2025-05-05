@@ -5,7 +5,7 @@ import { CartService  } from '../services/cart.service';
 import { AppLoggerToken, LOGGER_TOKEN } from '../tokens/logger-token';
 import { BUSINESS_NAME } from '../constants';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { NgFor, NgIf, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
@@ -13,10 +13,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   imports: [
     RouterLink,
     RouterLinkActive,
-    NgFor,
-    NgIf,
-    NgOptimizedImage,
-  ],
+    NgOptimizedImage
+],
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],

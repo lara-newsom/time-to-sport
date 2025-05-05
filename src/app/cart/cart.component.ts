@@ -8,7 +8,7 @@ import { CartService  } from '../services/cart.service';
 import { ContactService  } from '../services/contact.service';
 import { AppLoggerToken, LOGGER_TOKEN } from '../tokens/logger-token';
 import { BUSINESS_NAME } from '../constants';
-import { CurrencyPipe, NgFor, NgIf, NgOptimizedImage } from '@angular/common';
+import { CurrencyPipe, NgOptimizedImage } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -20,8 +20,6 @@ import { TwoPanelLayoutComponent } from '../shared-ui/two-panel-layout/two-panel
 @Component({
   standalone: true,
   imports: [
-    NgFor,
-    NgIf,
     CurrencyPipe,
     FormsModule,
     MatProgressSpinnerModule,

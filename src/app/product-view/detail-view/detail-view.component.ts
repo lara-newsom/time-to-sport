@@ -1,4 +1,4 @@
-import { AsyncPipe, CurrencyPipe, NgFor, NgIf, NgOptimizedImage } from '@angular/common';
+import { AsyncPipe, CurrencyPipe, NgOptimizedImage } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { AddToCartButtonComponent } from 'src/app/shared-ui/add-to-cart-button/add-to-cart-button.component';
@@ -7,12 +7,10 @@ import { AddToCartButtonComponent } from 'src/app/shared-ui/add-to-cart-button/a
 @Component({
   standalone: true,
   imports: [
-    NgIf,
     CurrencyPipe,
-    NgFor,
     NgOptimizedImage,
     AsyncPipe,
-    AddToCartButtonComponent,
+    AddToCartButtonComponent
 ],
   selector: 'app-detail-view',
   templateUrl: './detail-view.component.html',

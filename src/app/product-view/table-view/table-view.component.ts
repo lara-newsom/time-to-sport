@@ -1,11 +1,9 @@
-import { Component } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { Component, signal, computed } from '@angular/core';
 import { BUSINESS_NAME } from 'src/app/constants';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 import { AddToCartButtonComponent } from '../../shared-ui/add-to-cart-button/add-to-cart-button.component';
-import { NgOptimizedImage, AsyncPipe, UpperCasePipe, CurrencyPipe } from '@angular/common';
+import { NgOptimizedImage, UpperCasePipe, CurrencyPipe } from '@angular/common';
 
 type SortableKeys = Pick<Product, 'description' | 'title' | 'category' | 'price'  >;
 
@@ -14,40 +12,38 @@ type SortableKeys = Pick<Product, 'description' | 'title' | 'category' | 'price'
     templateUrl: './table-view.component.html',
     styleUrls: ['./table-view.component.scss'],
     standalone: true,
-    imports: [AddToCartButtonComponent, NgOptimizedImage, AsyncPipe, UpperCasePipe, CurrencyPipe]
+    imports: [AddToCartButtonComponent, NgOptimizedImage, UpperCasePipe, CurrencyPipe]
 })
 export class TableViewComponent {
   readonly BUSINESS_NAME = BUSINESS_NAME;
   constructor(
     readonly productService: ProductService,
   ){}
-  readonly sortColumnProperty$ = new BehaviorSubject<keyof SortableKeys | 'none'>('description');
+  readonly sortColumnProperty = signal<keyof SortableKeys | 'none'>('description');
 
-  readonly products = this.sortColumnProperty$.pipe(
-    switchMap((sortColumnProperty) => this.productService.filteredProducts.pipe(
-      map((filteredProducts) => {
-        if(sortColumnProperty !== 'none' && filteredProducts) {
-          return filteredProducts.sort((a, b) => this.compareFn(a, b, sortColumnProperty))
-        }
-        return filteredProducts || [];
-      })
-    ))
-  )
+  readonly products = computed(() => {
+    const sortColumnProperty = this.sortColumnProperty();
+    const filteredProducts = this.productService.filteredProducts();
+    if (sortColumnProperty !== 'none' && filteredProducts) {
+      return [...filteredProducts].sort((a, b) => this.compareFn(a, b, sortColumnProperty));
+    }
+    return filteredProducts || [];
+  });
 
   compareFn(a: Product, b: Product, prop: keyof SortableKeys) {
     if (a[prop]! < b[prop]!) {
       return -1;
-    } else if (a > b) {
+    } else if (a[prop]! > b[prop]!) {
       return 1;
     }
     return 0;
   }
   
   sortColumn(property: keyof SortableKeys){
-    if(this.sortColumnProperty$.getValue() === property) {
-      this.sortColumnProperty$.next('none');
+    if(this.sortColumnProperty() === property) {
+      this.sortColumnProperty.set('none');
     } else {
-      this.sortColumnProperty$.next(property)
+      this.sortColumnProperty.set(property);
     }
   }
 }

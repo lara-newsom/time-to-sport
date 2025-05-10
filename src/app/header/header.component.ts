@@ -25,7 +25,7 @@ export class HeaderComponent {
   protected readonly cartService = inject(CartService);
 
   readonly BUSINESS_NAME = BUSINESS_NAME;
-  readonly totalItems = toSignal(this.cartService.totalItems);
+  readonly totalItems = this.cartService.totalItems;
   readonly LINKS = LINKS;
   readonly ROUTE_TOKENS = ROUTE_TOKENS;
   readonly menuItemOne = 'Menu Item One';

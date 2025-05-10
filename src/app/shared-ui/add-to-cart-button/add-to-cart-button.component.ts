@@ -19,16 +19,14 @@ export class AddToCartButtonComponent {
   productId = input.required<string>();
   numberOnly = input<boolean>(false);
   
-  private readonly cartItems = toSignal(this.cartService.cartItems$);
-
   readonly addToCartMessage = computed(() => {
-    const items = this.cartItems() ?? {};
+    const items = this.cartService.cartItems() ?? {};
     const total = items[this.productId()]?.quantity ?? 0;
     return items[this.productId()]?.quantity ? `Add one to the ${total} in the cart` : 'Add one to cart';
   });
 
   readonly buttonMessage = computed(() => {
-    const items = this.cartItems() ?? {};
+    const items = this.cartService.cartItems() ?? {};
     const total = items[this.productId()]?.quantity ?? 0;
 
     if(this.numberOnly()) {

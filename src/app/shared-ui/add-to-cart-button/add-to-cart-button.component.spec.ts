@@ -2,7 +2,6 @@ import { render, screen } from '@testing-library/angular';
 import { AddToCartButtonComponent } from './add-to-cart-button.component';
 import { createSpyFromClass } from 'jest-auto-spies';
 import { CartService } from '../../services/cart.service';
-import { RouterTestingModule } from '@angular/router/testing';
 import userEvent from '@testing-library/user-event';
 
 describe('AddToCartButtonComponent', () => {
@@ -24,13 +23,11 @@ describe('AddToCartButtonComponent', () => {
         ...options
     };
     const mockCartService = createSpyFromClass(CartService, {
-      observablePropsToSpyOn: ['cartItems$'],
-      methodsToSpyOn: ['addCartItem', 'decrementCartItem'],
+      methodsToSpyOn: ['addCartItem', 'decrementCartItem', 'cartItems'],
     });
-    mockCartService.cartItems$.nextWith(cartItems);
+    mockCartService.cartItems.mockReturnValue(cartItems);
 
     const { fixture } = await render(AddToCartButtonComponent, {
-      imports: [RouterTestingModule],
       providers: [
         {
           provide: CartService,

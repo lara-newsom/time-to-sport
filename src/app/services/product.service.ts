@@ -1,19 +1,21 @@
-import { Injectable, inject, signal } from '@angular/core';
+import { Injectable, computed, inject, signal } from '@angular/core';
 import { Category } from '../models/category';
-import { BehaviorSubject, of } from 'rxjs';
-import { map, switchMap, tap} from'rxjs/operators';
+import { map, tap} from'rxjs/operators';
 import { PRODUCTS } from '../models/product-data.mock';
 import { ActivatedRoute } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { Product } from '../models/product';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
   private readonly route = inject(ActivatedRoute);
-  private selectedCategory = new BehaviorSubject<string>(Category.ALL);
-  readonly selectedCategory$ = this.selectedCategory.asObservable();
+
+  readonly selectedCategory = signal<string>(Category.ALL);
+
   setSelectedCategory(category: string):void {
-    this.selectedCategory.next(category)
+    this.selectedCategory.set(category)
   };
 
   readonly tableView = signal<boolean>(false);
@@ -25,48 +27,36 @@ export class ProductService {
       return this.tableView.set(true);
     }
     this.tableView.set(!this.tableView());
-  }
+  };
 
-  private readonly products = new BehaviorSubject(PRODUCTS);
-  readonly products$ = this.products.asObservable();
+  readonly products = signal<Product[]>(PRODUCTS);
 
-  readonly homeProducts = this.products.pipe(
-    map((products) => {
-      if(products.length > 0) {
-            const middle = Math.floor(products.length / 2);
-      
-            return [products[0], products[middle], products[products.length - 1]];
-          }
-          return [];
-    })
-  );
+  readonly homeProducts = computed(() => {
+    const products = this.products();
+    if (products.length > 0) {
+      const middle = Math.floor(products.length / 2);
+      return [products[0], products[middle], products[products.length - 1]];
+    }
+    return [];
+  });
 
-  readonly filteredProducts = this.selectedCategory.pipe(
-    switchMap((selectedCategory) => {
-      return selectedCategory === Category.ALL
-      ? this.products
-      : this.products.pipe(
-        map(
-          (products) => {
-            return products.filter((product) => product.category.toLowerCase() === selectedCategory.toLowerCase())
-          }
-        )
-      )
-    })
-  );
+  readonly filteredProducts = computed(() => {
+    if (this.selectedCategory() === Category.ALL) {
+      return this.products();
+    }
+    return this.products().filter((product) => product.category.toLowerCase() === this.selectedCategory().toLowerCase());
+  });
+
   
-  readonly selectedIdFromQueryParams = this.route.queryParamMap.pipe(
+  readonly selectedIdFromQueryParams = toSignal(this.route.queryParamMap.pipe(
     map((queryParams) => queryParams.get('productId') || undefined),
     tap(() => this.setTableView(false))
-  );
+  ));
 
-  readonly selectedProduct = this.selectedIdFromQueryParams.pipe(
-    switchMap((selectedProductId) => {
-      return this.filteredProducts.pipe(
-        map((products) => {
-          return products.find((product) => product.id === selectedProductId) || products[0];
-        })
-      )
-    })
-  );
+  readonly selectedProduct = computed(() => {
+    if (this.selectedIdFromQueryParams()) {
+      return this.products().find((product) => product.id === this.selectedIdFromQueryParams()) || this.products()[0];
+    }
+    return this.products()[0];
+  });
 }

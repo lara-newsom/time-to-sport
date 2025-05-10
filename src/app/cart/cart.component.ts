@@ -41,8 +41,8 @@ export class CartComponent {
   protected readonly contactService = inject(ContactService);
   private readonly cdr = inject(ChangeDetectorRef)
 
-  readonly cartItemsPlusQuantity = toSignal(this.cartService.cartItemsPlusQuantity);
-  readonly cartTotals = toSignal(this.cartService.cartTotals);
+  readonly cartItemsPlusQuantity = this.cartService.cartItemsPlusQuantity;
+  readonly cartTotals = this.cartService.cartTotals;
   readonly ROUTE_TOKENS = ROUTE_TOKENS;
   readonly BUSINESS_NAME = BUSINESS_NAME;
 

@@ -2,7 +2,7 @@
   aria-label="Products"
   class="main-content"
   >
-  @if (productService.selectedCategory$ | async; as selectedCategory) {
+  @if (productService.selectedCategory(); as selectedCategory) {
     <h2 class="visually-hidden">Products for {{ selectedCategory }} Category</h2>
   }
   <div class="table-toggle">

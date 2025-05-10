@@ -5,13 +5,13 @@
     </caption>
     <thead>
       <tr>
-        @if (sortColumnProperty$ | async; as sortColumnProperty) {
+        @if (sortColumnProperty()) {
           <th>Select</th>
           <th class="optional-col">Product Image</th>
           <th (click)="sortColumn('title')">
             Product Name
             <span
-              [class.rotated-arrow-icon]="sortColumnProperty === 'title'"
+              [class.rotated-arrow-icon]="sortColumnProperty() === 'title'"
               class="arrow-icon"
             ></span>
           </th>
@@ -21,7 +21,7 @@
             >
             Description
             <span
-              [class.rotated-arrow-icon]="sortColumnProperty === 'description'"
+              [class.rotated-arrow-icon]="sortColumnProperty() === 'description'"
               class="arrow-icon"
             ></span>
           </th>
@@ -30,14 +30,14 @@
             (click)="sortColumn('category')">
             Category
             <span
-              [class.rotated-arrow-icon]="sortColumnProperty === 'category'"
+              [class.rotated-arrow-icon]="sortColumnProperty() === 'category'"
               class="arrow-icon"
             ></span>
           </th>
           <th (click)="sortColumn('price')">
             Price
             <span
-              [class.rotated-arrow-icon]="sortColumnProperty === 'price'"
+              [class.rotated-arrow-icon]="sortColumnProperty() === 'price'"
               class="arrow-icon"
             ></span>
           </th>
@@ -45,7 +45,7 @@
       </tr>
     </thead>
     <tbody>
-      @for (product of products | async; track product) {
+      @for (product of products(); track product.id) {
         <tr
           >
           <td class="button-col">

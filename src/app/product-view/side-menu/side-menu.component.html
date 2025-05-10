@@ -3,7 +3,7 @@
   class="side-nav"
   >
   <ul>
-    @for (product of products | async; track product) {
+    @for (product of productService.filteredProducts(); track product.id) {
       <li>
         <a
           [routerLink]="['./']"

@@ -1,7 +1,7 @@
-import { Component, inject, OnDestroy, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, inject, OnDestroy, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { filter, takeUntil, tap } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 import { AppLoggerToken, LOGGER_TOKEN } from '../tokens/logger-token';
 import { ReplaySubject } from 'rxjs';
 import { SideMenuComponent } from './side-menu/side-menu.component';
@@ -28,6 +28,7 @@ export class ProductViewComponent implements OnDestroy {
   readonly productService = inject(ProductService);
   private readonly router = inject(Router);
   private readonly destroyed$ = new ReplaySubject<void>(1);
+  private readonly cdr = inject(ChangeDetectorRef);
   @Input() set categoryId(value: string) {
     this.productService.setSelectedCategory(value);
   };
@@ -40,6 +41,7 @@ export class ProductViewComponent implements OnDestroy {
         takeUntil(this.destroyed$)
       )
       .subscribe(() => {
+        this.cdr.markForCheck();
         const content = document.querySelector<HTMLElement>('#productDetail');
         if (content) {
           content.focus();

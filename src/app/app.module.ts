@@ -16,7 +16,9 @@ import { HeaderComponent } from './header/header.component';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, {
+      bindToComponentInputs: true,
+    }),
     BrowserAnimationsModule,
     CommonModule,
     HeaderComponent,

@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy } from '@angular/core';
+import { Component, inject, Input, OnDestroy } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, takeUntil, tap } from 'rxjs/operators';
@@ -14,16 +14,13 @@ export class ProductViewComponent implements OnDestroy {
   private readonly logger = inject<AppLoggerToken>(LOGGER_TOKEN);
   readonly productService = inject(ProductService);
   private readonly router = inject(Router);
-  private readonly activatedRoute = inject(ActivatedRoute);
   private readonly destroyed$ = new ReplaySubject<void>(1);
+  @Input() set categoryId(value: string) {
+    this.productService.setSelectedCategory(value);
+  };
+
 
   constructor() {
-    this.activatedRoute.paramMap.pipe(
-      tap((params) => {
-        this.productService.setSelectedCategory(params.get('categoryId') || '')
-        takeUntil(this.destroyed$)
-      })
-    ).subscribe();
     this.router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),

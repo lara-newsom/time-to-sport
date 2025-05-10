@@ -7,7 +7,6 @@ import { ReplaySubject } from 'rxjs';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { TableViewComponent } from './table-view/table-view.component';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-product-view',
@@ -19,7 +18,6 @@ import { AsyncPipe } from '@angular/common';
     TableViewComponent,
     SideMenuComponent,
     RouterOutlet,
-    AsyncPipe
 ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })

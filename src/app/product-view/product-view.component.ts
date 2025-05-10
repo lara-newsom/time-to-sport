@@ -1,6 +1,6 @@
-import { Component, inject, Input, OnDestroy } from '@angular/core';
+import { Component, inject, OnDestroy, ChangeDetectionStrategy, Input } from '@angular/core';
 import { ProductService } from '../services/product.service';
-import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter, takeUntil, tap } from 'rxjs/operators';
 import { AppLoggerToken, LOGGER_TOKEN } from '../tokens/logger-token';
 import { ReplaySubject } from 'rxjs';
@@ -21,6 +21,7 @@ import { AsyncPipe } from '@angular/common';
     RouterOutlet,
     AsyncPipe
 ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductViewComponent implements OnDestroy {
   private readonly logger = inject<AppLoggerToken>(LOGGER_TOKEN);

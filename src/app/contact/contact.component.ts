@@ -1,4 +1,4 @@
-import { Component, inject, Inject, OnDestroy } from "@angular/core";
+import { Component, inject, Inject, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from "@angular/core";
 import { ContactForm } from "../models/contact-form";
 import { ContactService } from "../services/contact.service";
 import { catchError, takeUntil, tap } from "rxjs/operators";
@@ -24,10 +24,12 @@ import { TwoPanelLayoutComponent } from "../shared-ui/two-panel-layout/two-panel
     CustomBorderButtonDirective,
     MatProgressSpinner
 ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContactComponent implements OnDestroy {
   private readonly logger = inject(LOGGER_TOKEN);
   private readonly contactService = inject(ContactService);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   model: ContactForm = {
     fullName: "",
@@ -62,7 +64,7 @@ export class ContactComponent implements OnDestroy {
         }),
         takeUntil(this.destroyed$)
       )
-      .subscribe();
+      .subscribe(() => this.cdr.markForCheck());
   }
 
   clearForm() {

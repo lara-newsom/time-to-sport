@@ -1,5 +1,5 @@
 import { AsyncPipe, CurrencyPipe, NgOptimizedImage } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { AddToCartButtonComponent } from 'src/app/shared-ui/add-to-cart-button/add-to-cart-button.component';
 
@@ -15,6 +15,7 @@ import { AddToCartButtonComponent } from 'src/app/shared-ui/add-to-cart-button/a
   selector: 'app-detail-view',
   templateUrl: './detail-view.component.html',
   styleUrls: ['./detail-view.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailViewComponent {
   protected readonly cartService = inject(CartService);

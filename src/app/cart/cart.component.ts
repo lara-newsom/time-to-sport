@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { of, ReplaySubject } from 'rxjs';
 import { catchError, takeUntil, tap } from 'rxjs/operators';
 import { ContactForm } from '../models/contact-form';
@@ -31,13 +31,15 @@ import { TwoPanelLayoutComponent } from '../shared-ui/two-panel-layout/two-panel
 ],
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+  styleUrls: ['./cart.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CartComponent {
   readonly cartService = inject(CartService);
   private readonly router = inject(Router);
   private readonly logger = inject<AppLoggerToken>(LOGGER_TOKEN);
   protected readonly contactService = inject(ContactService);
+  private readonly cdr = inject(ChangeDetectorRef)
 
   readonly cartItemsPlusQuantity = toSignal(this.cartService.cartItemsPlusQuantity);
   readonly cartTotals = toSignal(this.cartService.cartTotals);
@@ -70,7 +72,7 @@ export class CartComponent {
         return of(error);
       }),
       takeUntil(this.destroyed$)
-    ).subscribe()
+    ).subscribe(() => this.cdr.markForCheck());
   }
 
   returnToProducts() {

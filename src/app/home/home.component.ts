@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { SubSectionComponent } from '../shared-ui/sub-section/sub-section.component';
 import { FeaturedProductComponent } from '../featured-product/featured-product.component';
 import { SubHeroLogoComponent } from '../shared-ui/sub-hero-logo/sub-hero-logo.component';
@@ -9,7 +9,8 @@ import { HeroSectionComponent } from '../shared-ui/hero-section/hero-section.com
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss', '../featured-product/shared-featured-product-styles.scss',],
     standalone: true,
-    imports: [HeroSectionComponent, SubHeroLogoComponent, FeaturedProductComponent, SubSectionComponent]
+    imports: [HeroSectionComponent, SubHeroLogoComponent, FeaturedProductComponent, SubSectionComponent],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent {
   readonly homeImageUrl = '../../assets/images/heros/hero-5.jpg';

@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { SubHeroLogoComponent } from './sub-hero-logo.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImageModule } from '@angular/common';
 
 @NgModule({
   imports: [
     CommonModule,
+    NgOptimizedImageModule
   ],
   declarations: [
     SubHeroLogoComponent,
   ],
   exports: [
-    SubHeroLogoComponent
+    SubHeroLogoComponent,
   ],
 })
 export class SubHeroLogoModule { }

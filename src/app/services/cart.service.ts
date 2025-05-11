@@ -27,7 +27,7 @@ export class CartService {
 
   private readonly productService = inject(ProductService);
   private readonly cartHttpService = inject(CartHttpService);
-
+  
   readonly cartItemsPlusQuantity = this.cartItems.pipe(
     switchMap((cartItems) =>
       this.productService.products.pipe(

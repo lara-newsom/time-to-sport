@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { ROUTE_TOKENS } from '../models/route-tokens';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage, UpperCasePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
   standalone: true,
   imports: [
     RouterLink,
-    CommonModule,
+    UpperCasePipe,
     NgOptimizedImage
   ],
   selector: 'app-featured-product',

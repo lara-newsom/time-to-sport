@@ -25,7 +25,7 @@ export const routes: Routes = [
   },
   {
     path: ROUTE_TOKENS.cart,
-    loadChildren: () => import('./cart/cart.module').then(m => m.CartModule),
+    loadComponent: () => import('./cart/cart.component').then(m => m.CartComponent),
     title: 'Time to Sport - Cart',
   },
   {

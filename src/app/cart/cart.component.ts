@@ -9,8 +9,20 @@ import { CartService  } from '../services/cart.service';
 import { ContactService  } from '../services/contact.service';
 import { AppLoggerToken, LOGGER_TOKEN } from '../tokens/logger-token';
 import { BUSINESS_NAME } from '../constants';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SharedUiModule } from '../shared-ui/shared-ui.module';
 
 @Component({
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    SharedUiModule,
+    MatProgressSpinnerModule,
+    NgOptimizedImage,
+  ],
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']

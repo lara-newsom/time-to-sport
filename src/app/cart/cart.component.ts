@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { of, ReplaySubject } from 'rxjs';
 import { catchError, takeUntil, tap } from 'rxjs/operators';
 import { ContactForm } from '../models/contact-form';
@@ -15,7 +15,7 @@ import { BUSINESS_NAME } from '../constants';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
-export class CartComponent {
+export class CartComponent implements OnDestroy {
   constructor(
     readonly cartService: CartService,
     private readonly router: Router,

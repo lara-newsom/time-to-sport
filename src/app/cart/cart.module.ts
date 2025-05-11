@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { CommonModule, NgOptimizedImageModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Route, RouterModule } from '@angular/router';
 import { CartComponent } from './cart.component';
@@ -26,7 +26,7 @@ export const CART_ROUTES: Route[] = [
       RouterModule.forChild(CART_ROUTES),
       SharedUiModule,
       MatProgressSpinnerModule,
-      NgOptimizedImageModule,
+      NgOptimizedImage,
     ],
   providers: [
   ],

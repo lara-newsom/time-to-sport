@@ -7,6 +7,6 @@ import { BUSINESS_NAME } from '../../constants';
   styleUrls: ['./sub-hero-logo.component.scss']
 })
 export class SubHeroLogoComponent {
-  readonly logoUrl = '../../assets/images/badge.png';
-  readonly BUSINESS_NAME = BUSINESS_NAME
+  protected readonly logoUrl = '../../assets/images/badge.png';
+  protected readonly BUSINESS_NAME = BUSINESS_NAME
 }

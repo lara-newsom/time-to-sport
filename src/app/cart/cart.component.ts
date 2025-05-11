@@ -17,15 +17,13 @@ import { BUSINESS_NAME } from '../constants';
 })
 export class CartComponent implements OnDestroy {
   constructor(
-    readonly cartService: CartService,
+    protected readonly cartService: CartService,
     private readonly router: Router,
     @Inject(LOGGER_TOKEN) private readonly logger: AppLoggerToken,
     protected readonly contactService: ContactService
   ){}
-  readonly cartItemsPlusQuantity$ = this.cartService.cartItemsPlusQuantity
-  readonly cartTotals$ = this.cartService.cartTotals;
-  readonly ROUTE_TOKENS = ROUTE_TOKENS;
-  readonly BUSINESS_NAME= BUSINESS_NAME;
+  protected readonly ROUTE_TOKENS = ROUTE_TOKENS;
+  protected readonly BUSINESS_NAME= BUSINESS_NAME;
 
   destroyed$ = new ReplaySubject<void>(1);
 

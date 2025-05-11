@@ -1,6 +1,7 @@
-import { Directive, ElementRef, HostListener, inject, NgModule } from '@angular/core';
+import { Directive, ElementRef, HostListener, inject } from '@angular/core';
 
 @Directive({
+  standalone: true,
   selector: '[customButton]',
 })
 export class CustomButtonDirective {
@@ -44,14 +45,3 @@ export class CustomButtonDirective {
     this.addBlurStyles();
   }
 }
-
-
-@NgModule({
-  declarations: [
-    CustomButtonDirective
-  ],
-  exports: [
-    CustomButtonDirective
-  ],
-})
-export class CustomButtonDirectiveModule { }

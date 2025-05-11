@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
-import { CustomButtonDirectiveModule } from './custom-button.directive';
+import { CustomButtonDirective } from './custom-button.directive';
 import { TwoPanelLayoutModule } from './two-panel-layout/two-panel-layout.module';
-import { CustomBorderButtonDirectiveModule } from './custom-border-button.directive';
-import { HeroSectionComponent } from './hero-section/hero-section.component';
-import { SubSectionComponent } from './sub-section/sub-section.component';
+import { CustomBorderButtonDirective } from './custom-border-button.directive';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CardModule } from './card/card.module';
@@ -17,8 +15,8 @@ import { SubHeroLogoModule } from './sub-hero-logo/sub-hero-logo.module';
       SubSectionModule,
       HeroSectionModule,
       TwoPanelLayoutModule,
-      CustomButtonDirectiveModule,
-      CustomBorderButtonDirectiveModule,
+      CustomButtonDirective,
+      CustomBorderButtonDirective,
       AddToCartButtonModule,
       SubHeroLogoModule,
       RouterModule,
@@ -29,8 +27,8 @@ import { SubHeroLogoModule } from './sub-hero-logo/sub-hero-logo.module';
       SubSectionModule,
       HeroSectionModule,
       TwoPanelLayoutModule,
-      CustomButtonDirectiveModule,
-      CustomBorderButtonDirectiveModule,
+      CustomButtonDirective,
+      CustomBorderButtonDirective,
       AddToCartButtonModule,
       SubHeroLogoModule,
       RouterModule,

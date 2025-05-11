@@ -75,7 +75,6 @@
   
             <button
               customBorderButton
-              customButton
               [disabled]="contactForm.invalid"
               type="submit"
               name="submit"
@@ -98,7 +97,7 @@
         <div class="form-wrapper">
           <h3>Thank You for Your Message</h3>
           <p>It may take up to 24 hours for someone to respond.</p>
-          <button customBorderButton customButton (click)="clearForm()">Send Another</button>
+          <button customBorderButton (click)="clearForm()">Send Another</button>
         </div>
       </ng-template>
     </ng-template>

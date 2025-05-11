@@ -42,7 +42,7 @@
               <app-add-to-cart-button
                 [productId]="item.id"
                 [numberOnly]=true
-              ></app-add-to-cart-button>
+              />
               <p class="cart-item-price">{{ (item.price * (item.quantity || 1)) | currency }}</p>
             </div>
           </ng-container>
@@ -75,7 +75,7 @@
           </div>
           <div class="totals-details-wrapper" aria-live="assertive">
             <ng-container *ngIf="loading; else loaded">
-              <mat-spinner aria-label="Order Checkout"></mat-spinner>
+              <mat-spinner aria-label="Order Checkout"/>
               <div>Processing...</div>
             </ng-container>
             <ng-template #loaded>

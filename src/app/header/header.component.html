@@ -4,7 +4,7 @@
     [routerLink]="['/' + ROUTE_TOKENS.home]"
   ><img
     [alt]="'Home - ' + BUSINESS_NAME"
-    [src]="logoUrl"
+    [ngSrc]="logoUrl"
   /></a>
   <nav
     aria-label="Main"
@@ -79,7 +79,7 @@
           <span class="total-items">{{ totalItems }}</span>
         </ng-container>
         <img
-          src="../../assets/images/cart-icon.png"
+          ngSrc="../../assets/images/cart-icon.png"
           alt="Shopping Cart"
           width="24"
           height="20"

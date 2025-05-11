@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { TableViewComponent } from './table-view.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImageModule } from '@angular/common';
 import { SharedUiModule } from 'src/app/shared-ui/shared-ui.module';
 
 
@@ -11,6 +11,6 @@ import { SharedUiModule } from 'src/app/shared-ui/shared-ui.module';
   exports: [
     TableViewComponent
   ],
-  imports: [CommonModule, SharedUiModule],
+  imports: [CommonModule, SharedUiModule, NgOptimizedImageModule],
 })
 export class TableViewModule { }

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImageModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FeaturedProductComponent } from './featured-product.component';
@@ -13,6 +13,7 @@ import { FeaturedProductComponent } from './featured-product.component';
   imports: [
     RouterModule,
     CommonModule,
+    NgOptimizedImageModule
   ],
 })
 export class FeaturedProductModule { }

@@ -98,8 +98,9 @@
       }
     }
   },
-  "defaultProject": "time-to-sport",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

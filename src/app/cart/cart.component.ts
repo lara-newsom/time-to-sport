@@ -12,6 +12,7 @@ import { BUSINESS_NAME } from '../constants';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CustomBorderButtonDirective } from '../shared-ui/custom-border-button.directive';
 import { SharedUiModule } from '../shared-ui/shared-ui.module';
 
 @Component({
@@ -19,9 +20,10 @@ import { SharedUiModule } from '../shared-ui/shared-ui.module';
   imports: [
     CommonModule,
     FormsModule,
-    SharedUiModule,
+    CustomBorderButtonDirective,
     MatProgressSpinnerModule,
     NgOptimizedImage,
+    SharedUiModule
   ],
   selector: 'app-cart',
   templateUrl: './cart.component.html',

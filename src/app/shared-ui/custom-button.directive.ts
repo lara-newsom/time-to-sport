@@ -1,13 +1,12 @@
-import { Directive, ElementRef, HostListener, NgModule, } from '@angular/core';
+import { Directive, ElementRef, HostListener, inject, NgModule } from '@angular/core';
 
 @Directive({
   selector: '[customButton]',
 })
 export class CustomButtonDirective {
+  private elementRef = inject(ElementRef);
 
-  constructor(
-    private elementRef: ElementRef
-  ) {
+  constructor() {
     this.elementRef.nativeElement.style.padding= '10px';
     this.elementRef.nativeElement.style['min-width'] = '44px';
     this.elementRef.nativeElement.style['min-height'] = '44px';

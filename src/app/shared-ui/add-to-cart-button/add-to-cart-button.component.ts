@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CartService  } from '../../services/cart.service';
 import { map, switchMap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
@@ -9,9 +9,7 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./add-to-cart-button.component.scss'],
 })
 export class AddToCartButtonComponent {
-  constructor(
-    private readonly cartService: CartService
-  ){}
+  private readonly cartService = inject(CartService);
   productId$ = new BehaviorSubject('');
   @Input() set productId(val: string) {
     this.productId$.next(val);

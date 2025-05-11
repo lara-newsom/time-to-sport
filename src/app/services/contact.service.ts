@@ -1,16 +1,14 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ContactForm } from '../models/contact-form';
 import { timer } from 'rxjs';
 import { first, tap } from 'rxjs/operators';
-import { AppLoggerToken, LOGGER_TOKEN } from '../tokens/logger-token';
+import { LOGGER_TOKEN } from '../tokens/logger-token';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
-    constructor(
-      @Inject(LOGGER_TOKEN) private readonly logger: AppLoggerToken,
-    ){}
+  private readonly logger = inject(LOGGER_TOKEN);
 
   submitContactForm(model: ContactForm){
     return timer(3000).pipe(

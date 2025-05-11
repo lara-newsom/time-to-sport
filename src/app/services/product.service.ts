@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Category } from '../models/category';
 import { BehaviorSubject } from 'rxjs';
 import { map, switchMap, tap} from'rxjs/operators';
@@ -9,6 +9,9 @@ import { ProductHttpService } from './product-http.service';
   providedIn: 'root'
 })
 export class ProductService {
+  private readonly route = inject(ActivatedRoute);
+  private readonly productHttpService = inject(ProductHttpService);
+
   private selectedCategory = new BehaviorSubject<string>(Category.ALL);
   readonly selectedCategory$ = this.selectedCategory.asObservable();
   setSelectedCategory(category: string):void {
@@ -68,10 +71,4 @@ export class ProductService {
       )
     })
   );
-
-  constructor(
-    private readonly route: ActivatedRoute,
-    private readonly productHttpService: ProductHttpService
-  ){
-  }
 }

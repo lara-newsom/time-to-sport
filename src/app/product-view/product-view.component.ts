@@ -1,9 +1,9 @@
-import { Component, Inject, Input, OnDestroy } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, takeUntil, tap } from 'rxjs/operators';
-import { AppLoggerToken, LOGGER_TOKEN } from '../tokens/logger-token';
-import { BehaviorSubject, ReplaySubject } from 'rxjs';
+import { LOGGER_TOKEN } from '../tokens/logger-token';
+import { ReplaySubject } from 'rxjs';
 
 @Component({
   selector: 'app-product-view',
@@ -11,15 +11,15 @@ import { BehaviorSubject, ReplaySubject } from 'rxjs';
   styleUrls: ['./product-view.component.scss'],
 })
 export class ProductViewComponent implements OnDestroy {
+  private readonly logger = inject(LOGGER_TOKEN);
+  protected readonly productService = inject(ProductService);
+  private readonly router = inject(Router);
+  private readonly activatedRoute = inject(ActivatedRoute);
+
   private readonly destroyed$ = new ReplaySubject<void>(1);
   tableView = this.productService.tableView$;
 
-  constructor(
-    @Inject(LOGGER_TOKEN) private readonly logger: AppLoggerToken,
-    readonly productService: ProductService,
-    private readonly router: Router,
-    private readonly activatedRoute: ActivatedRoute
-  ) {
+  constructor() {
     this.activatedRoute.paramMap.pipe(
       tap((params) => {
         this.productService.setSelectedCategory(params.get('categoryId') || '')

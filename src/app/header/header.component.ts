@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { LINKS } from '../models/category';
 import { ROUTE_TOKENS } from '../models/route-tokens';
 import { CartService  } from '../services/cart.service';
@@ -12,11 +12,8 @@ import { BUSINESS_NAME } from '../constants';
 })
 export class HeaderComponent {
   readonly BUSINESS_NAME = BUSINESS_NAME;
-  
-  constructor(
-    @Inject(LOGGER_TOKEN) private readonly logger: AppLoggerToken,
-    protected readonly cartService: CartService
-  ){}
+  private readonly logger = inject(LOGGER_TOKEN);
+  protected readonly cartService = inject(CartService);
 
   totalItems = this.cartService.totalItems;
   showMenu = false;

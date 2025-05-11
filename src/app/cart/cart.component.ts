@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, inject } from '@angular/core';
 import { of, ReplaySubject } from 'rxjs';
 import { catchError, takeUntil, tap } from 'rxjs/operators';
 import { ContactForm } from '../models/contact-form';
@@ -7,7 +7,7 @@ import { ROUTE_TOKENS } from '../models/route-tokens';
 
 import { CartService  } from '../services/cart.service';
 import { ContactService  } from '../services/contact.service';
-import { AppLoggerToken, LOGGER_TOKEN } from '../tokens/logger-token';
+import { LOGGER_TOKEN } from '../tokens/logger-token';
 import { BUSINESS_NAME } from '../constants';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -28,12 +28,11 @@ import { SharedUiModule } from '../shared-ui/shared-ui.module';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnDestroy {
-  constructor(
-    protected readonly cartService: CartService,
-    private readonly router: Router,
-    @Inject(LOGGER_TOKEN) private readonly logger: AppLoggerToken,
-    protected readonly contactService: ContactService
-  ){}
+  protected readonly cartService = inject(CartService);
+  private readonly router = inject(Router);
+  private readonly logger = inject(LOGGER_TOKEN);
+  protected readonly contactService = inject(ContactService);
+
   protected readonly ROUTE_TOKENS = ROUTE_TOKENS;
   protected readonly BUSINESS_NAME= BUSINESS_NAME;
 

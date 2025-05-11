@@ -1,13 +1,11 @@
-import { Directive, ElementRef, NgModule } from '@angular/core';
+import { Directive, ElementRef, inject, NgModule } from '@angular/core';
 
 @Directive({
   selector: '[customBorderButton]',
 })
 export class CustomBorderButtonDirective {
-
-  constructor(
-    private readonly elementRef: ElementRef,
-  ) {
+  private elementRef = inject(ElementRef);
+  constructor() {
     this.elementRef.nativeElement.style['border-radius'] = 'var(--border-radius)';
   }
 }

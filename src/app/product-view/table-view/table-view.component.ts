@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { BUSINESS_NAME } from 'src/app/constants';
@@ -14,9 +14,8 @@ type SortableKeys = Pick<Product, 'description' | 'title' | 'category' | 'price'
 })
 export class TableViewComponent {
   readonly BUSINESS_NAME = BUSINESS_NAME;
-  constructor(
-    readonly productService: ProductService,
-  ){}
+  private readonly productService = inject(ProductService);
+  
   readonly sortColumnProperty$ = new BehaviorSubject<keyof SortableKeys | 'none'>('description');
 
   readonly products = this.sortColumnProperty$.pipe(

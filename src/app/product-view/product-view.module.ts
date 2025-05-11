@@ -13,11 +13,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 @NgModule({
   declarations: [
     ProductViewComponent,
-    DetailViewComponent,
   ],
   exports: [
     ProductViewComponent,
-    DetailViewComponent,
   ],
   imports: [
     CommonModule,
@@ -27,6 +25,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     SharedUiModule,
     MatSlideToggleModule,
     NgOptimizedImage,
+    DetailViewComponent
   ]
 })
 export class ProductViewModule {}

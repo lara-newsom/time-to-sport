@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, NgOptimizedImageModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { HeroSectionComponent } from './hero-section.component';
 
 @NgModule({
@@ -11,7 +11,7 @@ import { HeroSectionComponent } from './hero-section.component';
   ],
   imports: [
     CommonModule,
-    NgOptimizedImageModule
+    NgOptimizedImage
   ]
 })
 export class HeroSectionModule { }

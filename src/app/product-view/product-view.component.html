@@ -13,17 +13,16 @@
     >Enable Table View</mat-slide-toggle>
   </div>
   <ng-container *ngIf="tableView | async; else cardView">
-    <app-table-view></app-table-view>
+    <app-table-view />
   </ng-container>
   <ng-template #cardView>
     <div class="category-wrapper">
       <div class="side-nav-wrapper">
-        <app-side-menu
-        ></app-side-menu>
+        <app-side-menu />
       </div>
       <div class="horizontal-divider"></div>
       <div id="productDetail" class="detail-wrapper" tabindex="-1">
-        <router-outlet></router-outlet>
+        <router-outlet />
       </div>
     </div>
   </ng-template>

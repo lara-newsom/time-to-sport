@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ProductService } from './product.service';
 import { Product } from '../models/product';
 import { BehaviorSubject } from 'rxjs';
@@ -14,10 +14,7 @@ export class CartService {
     this.cartItems.next(items);
   }
 
-    constructor(
-      private readonly productService: ProductService
-    ){}
-
+  private readonly productService = inject(ProductService);
 
   readonly cartItemsPlusQuantity = this.cartItems.pipe(
     switchMap((cartItems) => this.productService.products$.pipe(

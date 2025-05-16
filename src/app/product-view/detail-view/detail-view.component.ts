@@ -1,5 +1,6 @@
-import { AsyncPipe, CurrencyPipe, NgFor, NgIf, NgOptimizedImage } from '@angular/common';
+import { CurrencyPipe, NgFor, NgIf, NgOptimizedImage } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { CartService } from 'src/app/services/cart.service';
 import { AddToCartButtonModule } from 'src/app/shared-ui/add-to-cart-button/add-to-cart-button.module';
 
@@ -9,7 +10,6 @@ import { AddToCartButtonModule } from 'src/app/shared-ui/add-to-cart-button/add-
     NgIf,
     NgOptimizedImage,
     NgFor,
-    AsyncPipe,
     CurrencyPipe,
     AddToCartButtonModule
   ],
@@ -20,6 +20,6 @@ import { AddToCartButtonModule } from 'src/app/shared-ui/add-to-cart-button/add-
 export class DetailViewComponent {
   private readonly cartService = inject(CartService);
 
-  readonly selectedProduct$ = this.cartService.selectedItemPlusQuantity;
+  readonly selectedProduct = toSignal(this.cartService.selectedItemPlusQuantity);
 }
 

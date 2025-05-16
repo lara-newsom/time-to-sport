@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss', '../featured-product/shared-featured-product-styles.scss',]
+  styleUrls: ['./home.component.scss', '../featured-product/shared-featured-product-styles.scss',],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
   readonly homeImageUrl = '../../assets/images/heros/hero-5.jpg';

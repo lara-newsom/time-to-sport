@@ -1,22 +1,23 @@
-<div 
-  *ngIf="productId$ | async as productId"
-  class="add-to-cart"
->
-  <button
-    customButton
-    aria-label="Remove one from cart"
-    (click)="decrementFromCart(productId)"
-  >-</button>
-  <button
-    customButton
-    [attr.aria-label]="addToCartMessage | async"
-    (click)="addToCart(productId)"
-  >
-    <span aria-live="assertive" [innerHTML]="buttonMessage | async"></span>
-  </button>
-  <button
-    customButton
-    aria-label="Add one to cart"
-    (click)="addToCart(productId)"
-  >+</button>
-</div>
+@if (productId$ | async; as productId) {
+  <div
+    class="add-to-cart"
+    >
+    <button
+      customButton
+      aria-label="Remove one from cart"
+      (click)="decrementFromCart(productId)"
+    >-</button>
+    <button
+      customButton
+      [attr.aria-label]="addToCartMessage | async"
+      (click)="addToCart(productId)"
+      >
+      <span aria-live="assertive" [innerHTML]="buttonMessage | async"></span>
+    </button>
+    <button
+      customButton
+      aria-label="Add one to cart"
+      (click)="addToCart(productId)"
+    >+</button>
+  </div>
+}

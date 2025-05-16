@@ -1,4 +1,4 @@
-import { CurrencyPipe, NgFor, NgIf, NgOptimizedImage } from '@angular/common';
+import { CurrencyPipe, NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CartService } from 'src/app/services/cart.service';
@@ -8,9 +8,7 @@ import { AddToCartButtonComponent } from 'src/app/shared-ui/add-to-cart-button/a
 @Component({
   standalone: true,
   imports: [
-    NgIf,
     NgOptimizedImage,
-    NgFor,
     CurrencyPipe,
     AddToCartButtonComponent
 ],

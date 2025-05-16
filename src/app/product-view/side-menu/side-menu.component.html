@@ -1,9 +1,9 @@
 <nav
   aria-label="Product Details"
   class="side-nav"
->
+  >
   <ul>
-    <ng-container *ngFor="let product of products | async">
+    @for (product of products | async; track product.id) {
       <li>
         <a
           [routerLink]="['./']"
@@ -13,15 +13,15 @@
             productId: product.id
           }"
           class="image-button"
-        >
+          >
           <img
             [alt]="product.title"
             [ngSrc]="product.thumb"
             height="106"
             width="106"
-          />
+            />
         </a>
       </li>
-    </ng-container>
+    }
   </ul>
 </nav>

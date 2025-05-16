@@ -8,7 +8,7 @@ import { MatProgressSpinner } from "@angular/material/progress-spinner";
 import { CustomBorderButtonDirective } from "../shared-ui/custom-border-button.directive";
 import { CustomButtonDirective } from "../shared-ui/custom-button.directive";
 import { FormsModule } from "@angular/forms";
-import { NgOptimizedImage, NgIf } from "@angular/common";
+import { NgOptimizedImage } from "@angular/common";
 import { TwoPanelLayoutComponent } from "../shared-ui/two-panel-layout/two-panel-layout.component";
 
 @Component({
@@ -19,12 +19,11 @@ import { TwoPanelLayoutComponent } from "../shared-ui/two-panel-layout/two-panel
   imports: [
     TwoPanelLayoutComponent,
     NgOptimizedImage,
-    NgIf,
     FormsModule,
     CustomButtonDirective,
     CustomBorderButtonDirective,
-    MatProgressSpinner,
-  ],
+    MatProgressSpinner
+],
 })
 export class ContactComponent implements OnDestroy {
   private readonly logger = inject(LOGGER_TOKEN);

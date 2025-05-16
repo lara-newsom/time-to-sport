@@ -6,8 +6,8 @@ import { PRODUCT_VIEW_ROUTES } from './product-view.routes';
 import { SideMenuModule } from './side-menu/side-menu.module';
 import { SharedUiModule } from '../shared-ui/shared-ui.module';
 import { DetailViewComponent } from './detail-view/detail-view.component';
-import { TableViewModule } from './table-view/table-view.module';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { TableViewComponent } from './table-view/table-view.component';
 
 
 @NgModule({
@@ -21,7 +21,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     CommonModule,
     RouterModule.forChild(PRODUCT_VIEW_ROUTES),
     SideMenuModule,
-    TableViewModule,
+    TableViewComponent,
     SharedUiModule,
     MatSlideToggleModule,
     NgOptimizedImage,

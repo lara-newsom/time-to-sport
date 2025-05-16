@@ -3,13 +3,7 @@ import { BUSINESS_NAME } from "src/app/constants";
 import { Product } from "src/app/models/product";
 import { ProductService } from "src/app/services/product.service";
 
-import {
-  NgIf,
-  NgFor,
-  NgOptimizedImage,
-  UpperCasePipe,
-  CurrencyPipe,
-} from "@angular/common";
+import { NgOptimizedImage, UpperCasePipe, CurrencyPipe } from "@angular/common";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { AddToCartButtonComponent } from "src/app/shared-ui/add-to-cart-button/add-to-cart-button.component";
 
@@ -24,8 +18,6 @@ type SortableKeys = Pick<
   styleUrls: ["./table-view.component.scss"],
   standalone: true,
   imports: [
-    NgIf,
-    NgFor,
     NgOptimizedImage,
     UpperCasePipe,
     CurrencyPipe,

@@ -1,7 +1,7 @@
-<ng-container *ngIf="selectedProduct(); else selectSomething">
+@if (selectedProduct()) {
   <div
     class="detail"
-  >
+    >
     <h3>{{ selectedProduct()?.title }}</h3>
     <div class="image-wrapper">
       <div class="product-image">
@@ -10,33 +10,31 @@
           [alt]="selectedProduct()?.title"
           height="500"
           width="500"
-        />
+          />
       </div>
       <div class="description">
-
         <p>{{ selectedProduct()?.description }}</p>
         <h4
           [attr.aria-label]="'Product Tags: ' + selectedProduct()?.tags"
-        >
+          >
           <p
             aria-hidden="true"
-          >Tags:
-          <ng-container *ngFor="let tag of selectedProduct()?.tags">
-            <span
-              class="tag"
-              [innerHTML]="tag"
-            ></span>
-          </ng-container>
+            >Tags:
+            @for (tag of selectedProduct()?.tags; track tag) {
+              <span
+                class="tag"
+                [innerHTML]="tag"
+              ></span>
+            }
           </p>
         </h4>
         <p class="price">Price: <span>{{ selectedProduct()?.price | currency }}</span></p>
         <app-add-to-cart-button
           [productId]="selectedProduct()?.id || ''"
-        />
+          />
       </div>
     </div>
   </div>
-</ng-container>
-<ng-template #selectSomething>
+} @else {
   <h3>Please Select a Product</h3>
-</ng-template>
+}

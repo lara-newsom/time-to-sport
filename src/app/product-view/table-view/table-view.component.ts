@@ -1,35 +1,57 @@
-import { Component, inject } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
-import { BUSINESS_NAME } from 'src/app/constants';
-import { Product } from 'src/app/models/product';
-import { ProductService } from 'src/app/services/product.service';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from "@angular/core";
+import { BUSINESS_NAME } from "src/app/constants";
+import { Product } from "src/app/models/product";
+import { ProductService } from "src/app/services/product.service";
+import { AddToCartButtonModule } from "../../shared-ui/add-to-cart-button/add-to-cart-button.module";
+import {
+  NgIf,
+  NgFor,
+  NgOptimizedImage,
+  UpperCasePipe,
+  CurrencyPipe,
+} from "@angular/common";
+import { toSignal } from "@angular/core/rxjs-interop";
 
-type SortableKeys = Pick<Product, 'description' | 'title' | 'category' | 'price'  >;
+type SortableKeys = Pick<
+  Product,
+  "description" | "title" | "category" | "price"
+>;
 
 @Component({
-  selector: 'app-table-view',
-  templateUrl: './table-view.component.html',
-  styleUrls: ['./table-view.component.scss']
+  selector: "app-table-view",
+  templateUrl: "./table-view.component.html",
+  styleUrls: ["./table-view.component.scss"],
+  standalone: true,
+  imports: [
+    NgIf,
+    NgFor,
+    AddToCartButtonModule,
+    NgOptimizedImage,
+    UpperCasePipe,
+    CurrencyPipe,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableViewComponent {
   readonly BUSINESS_NAME = BUSINESS_NAME;
   private readonly productService = inject(ProductService);
-  
-  readonly sortColumnProperty$ = new BehaviorSubject<keyof SortableKeys | 'none'>('description');
 
-  readonly products = this.sortColumnProperty$.pipe(
-    switchMap((sortColumnProperty) => this.productService.filteredProducts.pipe(
-      map((filteredProducts) => {
-        if(sortColumnProperty !== 'none' && filteredProducts) {
-          return filteredProducts.sort((a, b) => this.compareFn(a, b, sortColumnProperty))
-        }
-        return filteredProducts || [];
-      })
-    ))
-  )
+  readonly sortColumnProperty = signal< keyof SortableKeys | "none">("description");
+  readonly filteredProducts = toSignal(this.productService.filteredProducts);
 
-  compareFn(a: Product, b: Product, prop: keyof SortableKeys) {
+  readonly products = computed(() => {
+    if (this.sortColumnProperty() !== "none" && this.filteredProducts()) {
+      return this.filteredProducts()?.sort((a, b) =>
+        this.compareFn(a, b, this.sortColumnProperty())
+      );
+    }
+    return this.filteredProducts() || [];
+  })
+
+  compareFn(a: Product, b: Product, prop: keyof SortableKeys | "none") {
+    if (prop === "none") {
+      return 0;
+    }
     if (a[prop]! < b[prop]!) {
       return -1;
     } else if (a > b) {
@@ -37,12 +59,12 @@ export class TableViewComponent {
     }
     return 0;
   }
-  
-  sortColumn(property: keyof SortableKeys){
-    if(this.sortColumnProperty$.getValue() === property) {
-      this.sortColumnProperty$.next('none');
+
+  sortColumn(property: keyof SortableKeys) {
+    if (this.sortColumnProperty() === property) {
+      this.sortColumnProperty.set("none");
     } else {
-      this.sortColumnProperty$.next(property)
+      this.sortColumnProperty.set(property);
     }
   }
 }

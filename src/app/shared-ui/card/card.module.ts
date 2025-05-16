@@ -5,17 +5,15 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { AddToCartButtonModule } from '../add-to-cart-button/add-to-cart-button.module';
 
 @NgModule({
-    declarations: [
-      CardComponent,
-    ],
     exports: [
-      CardComponent,
+        CardComponent,
     ],
     imports: [
-      RouterModule,
-      CommonModule,
-      AddToCartButtonModule,
-      NgOptimizedImage
+        RouterModule,
+        CommonModule,
+        AddToCartButtonModule,
+        NgOptimizedImage,
+        CardComponent
     ],
 })
 export class CardModule { }

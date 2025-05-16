@@ -11,21 +11,19 @@ import { TableViewComponent } from './table-view/table-view.component';
 
 
 @NgModule({
-  declarations: [
-    ProductViewComponent,
-  ],
-  exports: [
-    ProductViewComponent,
-  ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(PRODUCT_VIEW_ROUTES),
-    SideMenuModule,
-    TableViewComponent,
-    SharedUiModule,
-    MatSlideToggleModule,
-    NgOptimizedImage,
-    DetailViewComponent
-  ]
+    exports: [
+        ProductViewComponent,
+    ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(PRODUCT_VIEW_ROUTES),
+        SideMenuModule,
+        TableViewComponent,
+        SharedUiModule,
+        MatSlideToggleModule,
+        NgOptimizedImage,
+        DetailViewComponent,
+        ProductViewComponent
+    ]
 })
 export class ProductViewModule {}

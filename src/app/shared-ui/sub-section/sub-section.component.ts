@@ -2,16 +2,17 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { NgFor } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { CardModule } from '../card/card.module';
+
 import { toSignal } from '@angular/core/rxjs-interop';
+import { CardComponent } from '../card/card.component';
 
 @Component({
   standalone: true,
   imports: [
-    CardModule,
     RouterModule,
     NgFor,
-  ],
+    CardComponent
+],
   selector: 'app-sub-section',
   templateUrl: './sub-section.component.html',
   styleUrls: ['./sub-section.component.scss'],

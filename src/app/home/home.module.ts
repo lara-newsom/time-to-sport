@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Route } from '@angular/router';
 import { HomeComponent } from './home.component';
-import { SharedUiModule } from '../shared-ui/shared-ui.module';
+
 import { FeaturedProductComponent } from '../featured-product/featured-product.component';
 
 export const HOME_ROUTES: Route[] = [
@@ -14,11 +14,10 @@ export const HOME_ROUTES: Route[] = [
 
 @NgModule({
     imports: [
-        FeaturedProductComponent,
-        SharedUiModule,
-        RouterModule.forChild(HOME_ROUTES),
-        HomeComponent
-    ],
+    FeaturedProductComponent,
+    RouterModule.forChild(HOME_ROUTES),
+    HomeComponent
+],
     exports: [
         HomeComponent
     ],

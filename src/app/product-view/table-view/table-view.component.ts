@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from "@a
 import { BUSINESS_NAME } from "src/app/constants";
 import { Product } from "src/app/models/product";
 import { ProductService } from "src/app/services/product.service";
-import { AddToCartButtonModule } from "../../shared-ui/add-to-cart-button/add-to-cart-button.module";
+
 import {
   NgIf,
   NgFor,
@@ -11,6 +11,7 @@ import {
   CurrencyPipe,
 } from "@angular/common";
 import { toSignal } from "@angular/core/rxjs-interop";
+import { AddToCartButtonComponent } from "src/app/shared-ui/add-to-cart-button/add-to-cart-button.component";
 
 type SortableKeys = Pick<
   Product,
@@ -25,11 +26,11 @@ type SortableKeys = Pick<
   imports: [
     NgIf,
     NgFor,
-    AddToCartButtonModule,
     NgOptimizedImage,
     UpperCasePipe,
     CurrencyPipe,
-  ],
+    AddToCartButtonComponent
+],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableViewComponent {

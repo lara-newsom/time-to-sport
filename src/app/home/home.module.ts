@@ -13,16 +13,14 @@ export const HOME_ROUTES: Route[] = [
 ]
 
 @NgModule({
-  imports: [
-    FeaturedProductComponent,
-    SharedUiModule,
-    RouterModule.forChild(HOME_ROUTES)
-  ],
-  declarations: [
-    HomeComponent,
-  ],
-  exports: [
-    HomeComponent
-  ],
+    imports: [
+        FeaturedProductComponent,
+        SharedUiModule,
+        RouterModule.forChild(HOME_ROUTES),
+        HomeComponent
+    ],
+    exports: [
+        HomeComponent
+    ],
 })
 export class HomeModule { }

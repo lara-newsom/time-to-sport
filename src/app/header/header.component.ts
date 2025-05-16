@@ -4,11 +4,22 @@ import { ROUTE_TOKENS } from '../models/route-tokens';
 import { CartService  } from '../services/cart.service';
 import { AppLoggerToken, LOGGER_TOKEN } from '../tokens/logger-token';
 import { BUSINESS_NAME } from '../constants';
+import { NgOptimizedImage, NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss'],
+    standalone: true,
+    imports: [
+        RouterLink,
+        NgOptimizedImage,
+        RouterLinkActive,
+        NgIf,
+        NgFor,
+        AsyncPipe,
+    ],
 })
 export class HeaderComponent {
   readonly BUSINESS_NAME = BUSINESS_NAME;

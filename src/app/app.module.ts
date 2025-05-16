@@ -16,7 +16,9 @@ import { NotFoundModule } from './not-found/not-found.module';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, {
+      bindToComponentInputs: true,
+    }),
     BrowserAnimationsModule,
     CommonModule,
     HeaderModule,

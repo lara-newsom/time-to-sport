@@ -12,8 +12,10 @@
       color="primary"
     >Enable Table View</mat-slide-toggle>
   </div>
-  @if (tableView | async) {
-    <app-table-view />
+  @if (tableView | async; as tableViewTrigger) {
+    @defer (when tableViewTrigger) {
+      <app-table-view />
+    }
   } @else {
     <div class="category-wrapper">
       <div class="side-nav-wrapper">

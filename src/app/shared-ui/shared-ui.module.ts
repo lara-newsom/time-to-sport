@@ -7,12 +7,12 @@ import { CommonModule } from '@angular/common';
 import { CardModule } from './card/card.module';
 import { AddToCartButtonModule } from './add-to-cart-button/add-to-cart-button.module';
 import { HeroSectionModule } from './hero-section/hero-section.module';
-import { SubSectionModule } from './sub-section/sub-section.module';
 import { SubHeroLogoModule } from './sub-hero-logo/sub-hero-logo.module';
+import { SubSectionComponent } from './sub-section/sub-section.component';
 
 @NgModule({
     exports: [
-      SubSectionModule,
+      SubSectionComponent,
       HeroSectionModule,
       TwoPanelLayoutModule,
       CustomButtonDirective,
@@ -24,7 +24,7 @@ import { SubHeroLogoModule } from './sub-hero-logo/sub-hero-logo.module';
       CardModule,
     ],
     imports: [
-      SubSectionModule,
+      SubSectionComponent,
       HeroSectionModule,
       TwoPanelLayoutModule,
       CustomButtonDirective,

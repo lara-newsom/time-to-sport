@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
     selector: 'app-two-panel-layout',
@@ -7,6 +7,6 @@ import { Component, Input } from '@angular/core';
     standalone: true
 })
 export class TwoPanelLayoutComponent {
-  @Input() ariaLabel!: string;
-  @Input() ariaLiveSetting: 'assertive' | 'polite' | 'off' = 'off';
+  readonly ariaLabel = input.required<string>();
+  readonly ariaLiveSetting = input<'assertive' | 'polite' | 'off'>('off')
 }

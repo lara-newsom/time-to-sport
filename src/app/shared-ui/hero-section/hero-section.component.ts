@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 
 @Component({
@@ -9,7 +9,7 @@ import { NgOptimizedImage } from '@angular/common';
     imports: [NgOptimizedImage],
 })
 export class HeroSectionComponent {
-  @Input() imageUrl = '../../assets/images/heros/hero-1.jpg';
+  readonly imageUrl = input<string>('../../assets/images/heros/hero-1.jpg');
 }
 
 

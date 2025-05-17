@@ -1,57 +1,49 @@
-import { Component, Input, inject } from '@angular/core';
-import { CartService  } from '../../services/cart.service';
-import { map, switchMap } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
-import { CustomButtonDirective } from '../custom-button.directive';
-import { AsyncPipe } from '@angular/common';
+import {
+  Component,
+  input,
+  inject,
+  booleanAttribute,
+  computed,
+} from "@angular/core";
+import { CartService } from "../../services/cart.service";
+import { toSignal } from "@angular/core/rxjs-interop";
+import { CustomButtonDirective } from "../custom-button.directive";
 
 @Component({
-    selector: 'app-add-to-cart-button',
-    templateUrl: './add-to-cart-button.component.html',
-    styleUrls: ['./add-to-cart-button.component.scss'],
-    standalone: true,
-    imports: [
-    CustomButtonDirective,
-    AsyncPipe
-],
+  selector: "app-add-to-cart-button",
+  templateUrl: "./add-to-cart-button.component.html",
+  styleUrls: ["./add-to-cart-button.component.scss"],
+  standalone: true,
+  imports: [CustomButtonDirective],
 })
 export class AddToCartButtonComponent {
   private readonly cartService = inject(CartService);
-  productId$ = new BehaviorSubject('');
-  @Input() set productId(val: string) {
-    this.productId$.next(val);
-  }
-  @Input() numberOnly: boolean = false;
+
+  readonly productId = input.required<string>();
+  readonly numberOnly = input(false, {
+    transform: booleanAttribute,
+  });
+
+  readonly cartItems = toSignal(this.cartService.cartItems$);
+
   addToCart(productId: string): void {
-    this.cartService.addCartItem(productId)
+    this.cartService.addCartItem(productId);
   }
 
   decrementFromCart(productId: string): void {
-    this.cartService.decrementCartItem(productId)
+    this.cartService.decrementCartItem(productId);
   }
 
-  readonly addToCartMessage = this.cartService.cartItems$.pipe(
-    switchMap((cartItems) => this.productId$.pipe(
-      map((productId) => {
-        const total = cartItems[productId]?.quantity || 0;
-  
-        return total ? `Add one to the ${total} in the cart`
-        : 'Add one to cart';
-      }))
-    ))
+  readonly addToCartMessage = computed(() => {
+    const total = this.cartItems()?.[this.productId()]?.quantity || 0;
+    return total ? `Add one to the ${total} in the cart` : "Add one to cart";
+  });
 
-    readonly buttonMessage = this.cartService.cartItems$.pipe(
-      switchMap((cartItems) => this.productId$.pipe(
-        map((productId) => {
-          const total = cartItems[productId]?.quantity || 0;
-  
-          if(this.numberOnly){
-            return total ? total : 0;
-          }
-          return total
-            ? `${total} in cart`
-            : 'Add to cart';
-        })
-      ))
-    );
+  readonly buttonMessage = computed(() => {
+    const total = this.cartItems()?.[this.productId()]?.quantity || 0;
+    if (this.numberOnly()) {
+      return total ? total : 0;
+    }
+    return total ? `${total} in cart` : "Add to cart";
+  });
 }

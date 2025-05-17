@@ -1,74 +1,71 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal, computed } from '@angular/core';
 import { Category } from '../models/category';
-import { BehaviorSubject } from 'rxjs';
-import { map, switchMap, tap} from'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { ProductHttpService } from './product-http.service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
   private readonly route = inject(ActivatedRoute);
   private readonly productHttpService = inject(ProductHttpService);
 
-  private selectedCategory = new BehaviorSubject<string>(Category.ALL);
-  readonly selectedCategory$ = this.selectedCategory.asObservable();
-  setSelectedCategory(category: string):void {
-    this.selectedCategory.next(category)
-  };
-
-  private tableView = new BehaviorSubject(false);
-  readonly tableView$ = this.tableView.asObservable();
-  setTableView(next?: boolean){
-    if(next === false) {
-      return this.tableView.next(false);
-    }
-    if(next === true) {
-      return this.tableView.next(true);
-    }
-    this.tableView.next(!this.tableView.getValue());
+  readonly selectedCategory = signal<string>(Category.ALL);
+  setSelectedCategory(category: string): void {
+    this.selectedCategory.set(category);
   }
 
-  readonly products = this.productHttpService.httpGetProducts();
+  readonly tableView = signal<boolean>(false);
+  setTableView(next?: boolean) {
+    if (next === false) {
+      this.tableView.set(false);
+      return;
+    }
+    if (next === true) {
+      this.tableView.set(true);
+      return;
+    }
+    this.tableView.set(!this.tableView());
+  }
 
-  readonly homeProducts = this.products.pipe(
-    map((products) => {
-      if(products.length > 0) {
-            const middle = Math.floor(products.length / 2);
-      
-            return [products[0], products[middle], products[products.length - 1]];
-          }
-          return [];
-    })
+  readonly products = toSignal(this.productHttpService.httpGetProducts());
+
+  readonly homeProducts = computed(() => {
+    const products = this.products();
+    if (products && products.length > 0) {
+      const middle = Math.floor(products.length / 2);
+      return [products[0], products[middle], products[products.length - 1]];
+    }
+    return [];
+  });
+
+  readonly filteredProducts = computed(() => {
+    const products = this.products();
+    if (!products) {
+      return [];
+    }
+    if (this.selectedCategory() === Category.ALL) {
+      return products;
+    }
+    return products.filter(
+      (product) =>
+        product.category.toLowerCase() === this.selectedCategory().toLowerCase()
+    );
+  });
+
+  readonly selectedIdFromQueryParams = toSignal(
+    this.route.queryParamMap.pipe(
+      map((params) => params.get('productId') || undefined),
+      tap(() => this.setTableView(false))
+    )
   );
 
-  readonly filteredProducts = this.selectedCategory.pipe(
-    switchMap((selectedCategory) => {
-      return selectedCategory === Category.ALL
-      ? this.products
-      : this.products.pipe(
-        map(
-          (products) => {
-            return products.filter((product) => product.category.toLowerCase() === selectedCategory.toLowerCase())
-          }
-        )
-      )
-    })
-  );
-  
-  readonly selectedIdFromQueryParams = this.route.queryParamMap.pipe(
-    map((queryParams) => queryParams.get('productId') || undefined),
-    tap(() => this.setTableView(false))
-  );
+  readonly selectedProduct = computed(() => {
+    const selectedProductId = this.selectedIdFromQueryParams();
+    const products = this.filteredProducts();
 
-  readonly selectedProduct = this.selectedIdFromQueryParams.pipe(
-    switchMap((selectedProductId) => {
-      return this.filteredProducts.pipe(
-        map((products) => {
-          return products.find((product) => product.id === selectedProductId) || products[0];
-        })
-      )
-    })
-  );
+    return products.find((p) => p.id === selectedProductId) || products[0];
+  });
 }

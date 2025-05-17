@@ -1,9 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ProductService } from '../../services/product.service';
-
 import { RouterModule } from '@angular/router';
-
-import { toSignal } from '@angular/core/rxjs-interop';
 import { CardComponent } from '../card/card.component';
 
 @Component({
@@ -19,6 +16,4 @@ import { CardComponent } from '../card/card.component';
 })
 export class SubSectionComponent {
   protected readonly productService = inject(ProductService);
-
-  readonly featured = toSignal(this.productService.homeProducts);
 }

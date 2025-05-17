@@ -4,7 +4,7 @@ import { ROUTE_TOKENS } from '../models/route-tokens';
 import { CartService  } from '../services/cart.service';
 import { LOGGER_TOKEN } from '../tokens/logger-token';
 import { BUSINESS_NAME } from '../constants';
-import { NgOptimizedImage, AsyncPipe } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
@@ -17,7 +17,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     RouterLink,
     NgOptimizedImage,
     RouterLinkActive,
-    AsyncPipe
 ],
 })
 export class HeaderComponent {

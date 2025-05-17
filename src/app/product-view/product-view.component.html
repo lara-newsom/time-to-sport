@@ -2,17 +2,15 @@
   aria-label="Products"
   class="main-content"
   >
-  @if (productService.selectedCategory$ | async; as selectedCategory) {
-    <h2 class="visually-hidden">Products for {{ selectedCategory }} Category</h2>
-  }
+  <h2 class="visually-hidden">Products for {{ productService.selectedCategory() }} Category</h2>
   <div class="table-toggle">
     <mat-slide-toggle
-      [checked]="tableView | async"
+      [checked]="productService.tableView()"
       (toggleChange)="switchView()"
       color="primary"
     >Enable Table View</mat-slide-toggle>
   </div>
-  @if (tableView | async; as tableViewTrigger) {
+  @if (productService.tableView(); as tableViewTrigger) {
     @defer (when tableViewTrigger) {
       <app-table-view />
     }

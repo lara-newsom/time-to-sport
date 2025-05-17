@@ -11,9 +11,8 @@ export class CartService {
   private readonly productService = inject(ProductService);
   private readonly cartHttpService = inject(CartHttpService);
 
-  private readonly products = toSignal(this.productService.products, { initialValue: [] });
-  private readonly homeProducts = toSignal(this.productService.homeProducts, { initialValue: [] });
-  private readonly selectedProduct = toSignal(this.productService.selectedProduct, { initialValue: undefined });
+  private readonly homeProducts = this.productService.homeProducts;
+  private readonly selectedProduct = this.productService.selectedProduct;
 
   readonly cartItems = signal<{ [key: string]: { quantity: number } }>({});
 
@@ -31,7 +30,7 @@ export class CartService {
 
   readonly cartItemsPlusQuantity = computed(() => {
     return Object.keys(this.cartItems()).reduce((acc, key) => {
-      const product = this.products().find((product: Product) => product.id === key);
+      const product = this.productService.products()?.find((product: Product) => product.id === key);
       if (product) {
         acc.push({ ...product, quantity: this.cartItems()[key].quantity });
       }
@@ -54,7 +53,7 @@ export class CartService {
 
   readonly cartTotals = computed(() => {
     const subtotal = Object.keys(this.cartItems()).reduce((acc, key) => {
-      const product = this.products().find((product: Product) => product.id === key);
+      const product = this.productService.products()?.find((product: Product) => product.id === key);
       if (product) {
         return acc + (this.cartItems()[key].quantity || 0) * product.price;
       }
@@ -70,7 +69,7 @@ export class CartService {
 
   readonly totalItems = computed(() => {
     return Object.keys(this.cartItems()).reduce((acc, key) => {
-      const product = this.products().find((product: Product) => product.id === key);
+      const product = this.productService.products()?.find((product: Product) => product.id === key);
       if (product) {
         return acc + (this.cartItems()[key].quantity || 0);
       }

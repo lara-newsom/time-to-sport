@@ -33,15 +33,15 @@ describe('CartService', ()=> {
         };
 
         const mockProductService = createSpyFromClass(ProductService, {
-            observablePropsToSpyOn: [
+            methodsToSpyOn: [
                 'homeProducts',
                 'products',
                 'selectedProduct'
             ]
         });
-        mockProductService.selectedProduct.nextWith(selectedProduct);
-        mockProductService.homeProducts.nextWith(homeProducts);
-        mockProductService.products.nextWith(products);
+        mockProductService.selectedProduct.mockReturnValue(selectedProduct);
+        mockProductService.homeProducts.mockReturnValue(homeProducts);
+        mockProductService.products.mockReturnValue(products);
 
         const mockHttpCartService = createSpyFromClass(CartHttpService, {
             methodsToSpyOn: [

@@ -9,7 +9,7 @@ import { CartService  } from '../services/cart.service';
 import { ContactService  } from '../services/contact.service';
 import { LOGGER_TOKEN } from '../tokens/logger-token';
 import { BUSINESS_NAME } from '../constants';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CurrencyPipe, NgOptimizedImage } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CustomBorderButtonDirective } from '../shared-ui/custom-border-button.directive';
@@ -20,7 +20,7 @@ import { TwoPanelLayoutComponent } from '../shared-ui/two-panel-layout/two-panel
 @Component({
   standalone: true,
   imports: [
-    CommonModule,
+    CurrencyPipe,
     FormsModule,
     CustomBorderButtonDirective,
     MatProgressSpinnerModule,

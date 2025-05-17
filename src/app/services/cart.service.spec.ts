@@ -3,9 +3,9 @@ import { createProduct } from '../models/data-mocks';
 import { CartService } from './cart.service';
 import { ProductService } from './product.service';
 import { createSpyFromClass } from 'jest-auto-spies';
-import { subscribeSpyTo } from '@hirez_io/observer-spy';
 import { CartHttpService } from './cart-http.service';
 import { of } from 'rxjs';
+import { TestBed } from '@angular/core/testing';
 
 describe('CartService', ()=> {
     function setup(options : Partial<{
@@ -48,10 +48,16 @@ describe('CartService', ()=> {
                 'getCartItems'
             ]
         });
-
         mockHttpCartService.getCartItems.mockReturnValue(of({}));
 
-        const serviceUnderTest = new CartService(mockProductService, mockHttpCartService);
+        TestBed.configureTestingModule({
+            providers: [
+                { provide: ProductService, useValue: mockProductService },
+                { provide: CartHttpService, useValue: mockHttpCartService },
+                CartService
+            ]
+        });
+        const serviceUnderTest = TestBed.inject(CartService);
 
         return {
             mockProductService,
@@ -95,11 +101,8 @@ describe('CartService', ()=> {
             ];
 
             const { serviceUnderTest } = setup({products});
-
             serviceUnderTest.setCartItems(cartItems);
-
-            const cartItemsPlusQuantitySpy = subscribeSpyTo(serviceUnderTest.cartItemsPlusQuantity);
-            expect(cartItemsPlusQuantitySpy.getLastValue()).toEqual(expectedProducts);
+            expect(serviceUnderTest.cartItemsPlusQuantity()).toEqual(expectedProducts);
         });
     });
 
@@ -114,10 +117,7 @@ describe('CartService', ()=> {
 
             const {serviceUnderTest } = setup({selectedProduct});
             serviceUnderTest.setCartItems(cartItems);
-
-            const selectedItemPlusQuantitySpy = subscribeSpyTo(serviceUnderTest.selectedItemPlusQuantity);
-
-            expect(selectedItemPlusQuantitySpy.getLastValue()).toEqual({
+            expect(serviceUnderTest.selectedItemPlusQuantity()).toEqual({
                 ...selectedProduct,
                 quantity
             });
@@ -131,10 +131,7 @@ describe('CartService', ()=> {
 
             const {serviceUnderTest } = setup({selectedProduct});
             serviceUnderTest.setCartItems(cartItems);
-
-            const selectedItemPlusQuantitySpy = subscribeSpyTo(serviceUnderTest.selectedItemPlusQuantity);
-
-            expect(selectedItemPlusQuantitySpy.getLastValue()).toEqual({
+            expect(serviceUnderTest.selectedItemPlusQuantity()).toEqual({
                 ...selectedProduct,
                 quantity: 0
             });
@@ -182,12 +179,8 @@ describe('CartService', ()=> {
             ];
 
             const {serviceUnderTest} = setup({homeProducts});
-
             serviceUnderTest.setCartItems(cartItems);
-
-            const featuredProductsPlusQuantitySpy = subscribeSpyTo(serviceUnderTest.featuredProductsPlusQuantity);
-
-            expect(featuredProductsPlusQuantitySpy.getLastValue()).toEqual(expectedProducts);
+            expect(serviceUnderTest.featuredProductsPlusQuantity()).toEqual(expectedProducts);
         });
     });
 
@@ -228,11 +221,8 @@ describe('CartService', ()=> {
             };
 
             const { serviceUnderTest } = setup({products});
-
             serviceUnderTest.setCartItems(cartItems);
-
-            const cartTotalsSpy = subscribeSpyTo(serviceUnderTest.cartTotals);
-            expect(cartTotalsSpy.getLastValue()).toEqual(expectedTotals);
+            expect(serviceUnderTest.cartTotals()).toEqual(expectedTotals);
         });
     });
 
@@ -262,11 +252,8 @@ describe('CartService', ()=> {
             const products = [product1, product, product2];
 
             const { serviceUnderTest } = setup({products});
-
             serviceUnderTest.setCartItems(cartItems);
-
-            const totalItemsSpy = subscribeSpyTo(serviceUnderTest.totalItems);
-            expect(totalItemsSpy.getLastValue()).toBe(7);
+            expect(serviceUnderTest.totalItems()).toBe(7);
         });
     });
 
@@ -286,55 +273,45 @@ describe('CartService', ()=> {
                 createProduct({id: productId2}),
             ]
             const { serviceUnderTest } = setup({products});
-
             serviceUnderTest.setCartItems(cartItems);
-
-            const cartItemsSpy = subscribeSpyTo(serviceUnderTest.cartItems$);
-            expect(cartItemsSpy.getLastValue()).toEqual(cartItems);
+            expect(serviceUnderTest.cartItems()).toEqual(cartItems);
 
             serviceUnderTest.addCartItem(productId1);
-
-            const totalItemsSpy = subscribeSpyTo(serviceUnderTest.totalItems);
-            expect(totalItemsSpy.getLastValue()).toBe(3);
-            expect(cartItemsSpy.getLastValue()).toEqual({
+            expect(serviceUnderTest.totalItems()).toBe(3);
+            expect(serviceUnderTest.cartItems()).toEqual({
                 [productId1]: { quantity: productQuantity1 + 1 },
             });
 
             serviceUnderTest.addCartItem(productId2);
-
-            expect(totalItemsSpy.getLastValue()).toBe(4);
-            expect(cartItemsSpy.getLastValue()).toEqual({
+            expect(serviceUnderTest.totalItems()).toBe(4);
+            expect(serviceUnderTest.cartItems()).toEqual({
                 [productId1]: { quantity: productQuantity1 + 1 },
                 [productId2]: { quantity:  1 },
             });
 
             serviceUnderTest.decrementCartItem(productId1);
-
-            expect(totalItemsSpy.getLastValue()).toBe(3);
-            expect(cartItemsSpy.getLastValue()).toEqual({
+            expect(serviceUnderTest.totalItems()).toBe(3);
+            expect(serviceUnderTest.cartItems()).toEqual({
                 [productId1]: { quantity: productQuantity1 },
                 [productId2]: { quantity:  1 },
             });
 
             serviceUnderTest.decrementCartItem(productId1);
-
-            expect(totalItemsSpy.getLastValue()).toBe(2);
-            expect(cartItemsSpy.getLastValue()).toEqual({
+            expect(serviceUnderTest.totalItems()).toBe(2);
+            expect(serviceUnderTest.cartItems()).toEqual({
                 [productId1]: { quantity: productQuantity1 - 1 },
                 [productId2]: { quantity:  1 },
             });
 
             serviceUnderTest.decrementCartItem(productId1);
-
-            expect(totalItemsSpy.getLastValue()).toBe(1);
-            expect(cartItemsSpy.getLastValue()).toEqual({
+            expect(serviceUnderTest.totalItems()).toBe(1);
+            expect(serviceUnderTest.cartItems()).toEqual({
                 [productId2]: { quantity:  1 },
             });
 
             serviceUnderTest.decrementCartItem(productId2);
-
-            expect(totalItemsSpy.getLastValue()).toBe(0);
-            expect(cartItemsSpy.getLastValue()).toEqual({
+            expect(serviceUnderTest.totalItems()).toBe(0);
+            expect(serviceUnderTest.cartItems()).toEqual({
             });
         });
     });

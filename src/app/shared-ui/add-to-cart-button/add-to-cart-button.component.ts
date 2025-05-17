@@ -5,15 +5,14 @@ import {
   booleanAttribute,
   computed,
   ChangeDetectionStrategy,
-} from "@angular/core";
-import { CartService } from "../../services/cart.service";
-import { toSignal } from "@angular/core/rxjs-interop";
-import { CustomButtonDirective } from "../custom-button.directive";
+} from '@angular/core';
+import { CartService } from '../../services/cart.service';
+import { CustomButtonDirective } from '../custom-button.directive';
 
 @Component({
-  selector: "app-add-to-cart-button",
-  templateUrl: "./add-to-cart-button.component.html",
-  styleUrls: ["./add-to-cart-button.component.scss"],
+  selector: 'app-add-to-cart-button',
+  templateUrl: './add-to-cart-button.component.html',
+  styleUrls: ['./add-to-cart-button.component.scss'],
   standalone: true,
   imports: [CustomButtonDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,7 +25,7 @@ export class AddToCartButtonComponent {
     transform: booleanAttribute,
   });
 
-  readonly cartItems = toSignal(this.cartService.cartItems$);
+  readonly cartItems = this.cartService.cartItems;
 
   addToCart(productId: string): void {
     this.cartService.addCartItem(productId);
@@ -38,7 +37,7 @@ export class AddToCartButtonComponent {
 
   readonly addToCartMessage = computed(() => {
     const total = this.cartItems()?.[this.productId()]?.quantity || 0;
-    return total ? `Add one to the ${total} in the cart` : "Add one to cart";
+    return total ? `Add one to the ${total} in the cart` : 'Add one to cart';
   });
 
   readonly buttonMessage = computed(() => {
@@ -46,6 +45,6 @@ export class AddToCartButtonComponent {
     if (this.numberOnly()) {
       return total ? total : 0;
     }
-    return total ? `${total} in cart` : "Add to cart";
+    return total ? `${total} in cart` : 'Add to cart';
   });
 }

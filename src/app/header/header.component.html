@@ -78,7 +78,7 @@
             queryParamsHandling="merge"
             class="menu-option"
             >
-            @if (totalItems | async; as totalItems) {
+            @if (cartService.totalItems(); as totalItems) {
               <span class="total-items">{{ totalItems }}</span>
             }
             <img

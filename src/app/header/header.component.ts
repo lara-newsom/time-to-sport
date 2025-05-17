@@ -2,7 +2,7 @@ import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { LINKS } from '../models/category';
 import { ROUTE_TOKENS } from '../models/route-tokens';
 import { CartService  } from '../services/cart.service';
-import { AppLoggerToken, LOGGER_TOKEN } from '../tokens/logger-token';
+import { LOGGER_TOKEN } from '../tokens/logger-token';
 import { BUSINESS_NAME } from '../constants';
 import { NgOptimizedImage, AsyncPipe } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -25,7 +25,6 @@ export class HeaderComponent {
   private readonly logger = inject(LOGGER_TOKEN);
   protected readonly cartService = inject(CartService);
 
-  totalItems = this.cartService.totalItems;
   showMenu = false;
   readonly LINKS = LINKS;
   readonly ROUTE_TOKENS = ROUTE_TOKENS;

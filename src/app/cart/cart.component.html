@@ -26,7 +26,7 @@
       </div>
     } @else {
       <div class="cart-items-wrapper">
-        @if (cartService.cartItemsPlusQuantity | async; as cartItems) {
+        @if (cartService.cartItemsPlusQuantity(); as cartItems) {
           @for (item of cartItems; track item) {
             <div class="cart-item">
               <div class="cart-item-image-wrapper">
@@ -50,7 +50,7 @@
           }
         }
       </div>
-      @if (cartService.cartTotals | async; as cartTotals) {
+      @if (cartService.cartTotals(); as cartTotals) {
         <div class="totals-item">
           <h4 class="visually-hidden">Cart Total: {{ cartTotals.total | currency }}</h4>
           <div class="totals-details-wrapper">

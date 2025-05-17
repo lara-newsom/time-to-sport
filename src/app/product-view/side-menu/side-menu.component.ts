@@ -10,9 +10,9 @@ import { NgOptimizedImage, AsyncPipe } from '@angular/common';
     styleUrls: ['./side-menu.component.scss'],
     standalone: true,
     imports: [
-    RouterLinkActive,
-    RouterLink,
     NgOptimizedImage,
+    RouterLink,
+    RouterLinkActive,
     AsyncPipe
 ],
 })

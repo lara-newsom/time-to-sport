@@ -4,6 +4,8 @@ import { CartService } from './cart.service';
 import { ProductService } from './product.service';
 import { createSpyFromClass } from 'jest-auto-spies';
 import { subscribeSpyTo } from '@hirez_io/observer-spy';
+import { CartHttpService } from './cart-http.service';
+import { of } from 'rxjs';
 
 describe('CartService', ()=> {
     function setup(options : Partial<{
@@ -33,15 +35,23 @@ describe('CartService', ()=> {
         const mockProductService = createSpyFromClass(ProductService, {
             observablePropsToSpyOn: [
                 'homeProducts',
-                'products$',
+                'products',
                 'selectedProduct'
             ]
         });
         mockProductService.selectedProduct.nextWith(selectedProduct);
         mockProductService.homeProducts.nextWith(homeProducts);
-        mockProductService.products$.nextWith(products);
+        mockProductService.products.nextWith(products);
 
-        const serviceUnderTest = new CartService(mockProductService);
+        const mockHttpCartService = createSpyFromClass(CartHttpService, {
+            methodsToSpyOn: [
+                'getCartItems'
+            ]
+        });
+
+        mockHttpCartService.getCartItems.mockReturnValue(of({}));
+
+        const serviceUnderTest = new CartService(mockProductService, mockHttpCartService);
 
         return {
             mockProductService,

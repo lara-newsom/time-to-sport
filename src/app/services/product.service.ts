@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Category } from '../models/category';
-import { BehaviorSubject, of } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { map, switchMap, tap} from'rxjs/operators';
-import { PRODUCTS } from '../models/product-data.mock';
 import { ActivatedRoute } from '@angular/router';
+import { ProductHttpService } from './product-http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,6 @@ export class ProductService {
   private tableView = new BehaviorSubject(false);
   readonly tableView$ = this.tableView.asObservable();
   setTableView(next?: boolean){
-    console.log('set tableview', next)
     if(next === false) {
       return this.tableView.next(false);
     }
@@ -28,9 +27,7 @@ export class ProductService {
     this.tableView.next(!this.tableView.getValue());
   }
 
-
-  private readonly products = new BehaviorSubject(PRODUCTS);
-  readonly products$ = this.products.asObservable();
+  readonly products = this.productHttpService.httpGetProducts();
 
   readonly homeProducts = this.products.pipe(
     map((products) => {
@@ -72,6 +69,9 @@ export class ProductService {
     })
   );
 
-  constructor(private readonly route: ActivatedRoute){
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly productHttpService: ProductHttpService
+  ){
   }
 }

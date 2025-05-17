@@ -11,16 +11,16 @@ export const routes: Routes = [
   },
   {
     path: ROUTE_TOKENS.home,
-    loadChildren: () => import ('./home/home.module').then(m => m.HomeModule)
+    loadComponent: () => import ('./home/home.component').then(m => m.HomeComponent)
   },
   {
     path: ROUTE_TOKENS.products,
-    loadChildren: () => import('./product-view/product-view.module').then(m => m.ProductViewModule),
+    loadChildren: () => import('./product-view/product-view.routes').then(m => m.PRODUCT_VIEW_ROUTES),
     title: 'Time to Sport - Products',
   },
   {
     path: ROUTE_TOKENS.contact,
-    loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule),
+    loadComponent: () => import('./contact/contact.component').then(m => m.ContactComponent),
     title: 'Time to Sport - Contact',
   },
   {

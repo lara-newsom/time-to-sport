@@ -1,4 +1,11 @@
-import { Component, inject, Input, OnDestroy } from "@angular/core";
+import {
+  Component,
+  inject,
+  Input,
+  OnDestroy,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+} from "@angular/core";
 import { ProductService } from "../services/product.service";
 import { NavigationEnd, Router, RouterOutlet } from "@angular/router";
 import { filter, takeUntil } from "rxjs/operators";
@@ -21,6 +28,7 @@ import { AsyncPipe } from "@angular/common";
     RouterOutlet,
     AsyncPipe,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductViewComponent implements OnDestroy {
   @Input() set categoryId(val: string) {
@@ -29,6 +37,7 @@ export class ProductViewComponent implements OnDestroy {
   private readonly logger = inject(LOGGER_TOKEN);
   protected readonly productService = inject(ProductService);
   private readonly router = inject(Router);
+  private readonly cd = inject(ChangeDetectorRef);
 
   private readonly destroyed$ = new ReplaySubject<void>(1);
   tableView = this.productService.tableView$;
@@ -44,6 +53,7 @@ export class ProductViewComponent implements OnDestroy {
         if (content) {
           content.focus();
         }
+        this.cd.markForCheck();
       });
   }
 

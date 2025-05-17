@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { SubHeroLogoComponent } from '../shared-ui/sub-hero-logo/sub-hero-logo.component';
 import { HeroSectionComponent } from '../shared-ui/hero-section/hero-section.component';
 
@@ -7,6 +7,7 @@ import { HeroSectionComponent } from '../shared-ui/hero-section/hero-section.com
     templateUrl: './not-found.component.html',
     standalone: true,
     imports: [HeroSectionComponent, SubHeroLogoComponent],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NotFoundComponent {
 

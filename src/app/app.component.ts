@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { LOGGER_TOKEN } from './tokens/logger-token';
 import { LoggerService } from './services/logger.service';
@@ -16,7 +16,8 @@ import { HeaderComponent } from './header/header.component';
         }
     ],
     standalone: true,
-    imports: [HeaderComponent, RouterOutlet]
+    imports: [HeaderComponent, RouterOutlet],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
   readonly BUSINESS_NAME = BUSINESS_NAME;

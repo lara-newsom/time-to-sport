@@ -1,4 +1,4 @@
-import { Component, OnDestroy, inject } from '@angular/core';
+import { Component, OnDestroy, inject, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { of, ReplaySubject } from 'rxjs';
 import { catchError, takeUntil, tap } from 'rxjs/operators';
 import { ContactForm } from '../models/contact-form';
@@ -31,13 +31,15 @@ import { TwoPanelLayoutComponent } from '../shared-ui/two-panel-layout/two-panel
 ],
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+  styleUrls: ['./cart.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartComponent implements OnDestroy {
   protected readonly cartService = inject(CartService);
   private readonly router = inject(Router);
   private readonly logger = inject(LOGGER_TOKEN);
   protected readonly contactService = inject(ContactService);
+  private readonly cd = inject(ChangeDetectorRef);
 
   protected readonly ROUTE_TOKENS = ROUTE_TOKENS;
   protected readonly BUSINESS_NAME= BUSINESS_NAME;
@@ -68,7 +70,7 @@ export class CartComponent implements OnDestroy {
         return of(error);
       }),
       takeUntil(this.destroyed$)
-    ).subscribe()
+    ).subscribe(() => this.cd.markForCheck());
   }
 
   returnToProducts() {

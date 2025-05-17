@@ -4,6 +4,7 @@ import {
   inject,
   booleanAttribute,
   computed,
+  ChangeDetectionStrategy,
 } from "@angular/core";
 import { CartService } from "../../services/cart.service";
 import { toSignal } from "@angular/core/rxjs-interop";
@@ -15,6 +16,7 @@ import { CustomButtonDirective } from "../custom-button.directive";
   styleUrls: ["./add-to-cart-button.component.scss"],
   standalone: true,
   imports: [CustomButtonDirective],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddToCartButtonComponent {
   private readonly cartService = inject(CartService);

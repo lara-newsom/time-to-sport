@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Product } from '../../models/product';
 import { ROUTE_TOKENS } from '../../models/route-tokens';
 import { AddToCartButtonComponent } from '../add-to-cart-button/add-to-cart-button.component';
@@ -10,7 +10,8 @@ import { NgOptimizedImage, CurrencyPipe } from '@angular/common';
     templateUrl: './card.component.html',
     styleUrls: ['./card.component.scss'],
     standalone: true,
-    imports: [NgOptimizedImage, RouterLink, AddToCartButtonComponent, CurrencyPipe]
+    imports: [NgOptimizedImage, RouterLink, AddToCartButtonComponent, CurrencyPipe],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent {
   readonly product = input.required<Product>();

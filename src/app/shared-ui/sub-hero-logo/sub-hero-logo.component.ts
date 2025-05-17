@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BUSINESS_NAME } from '../../constants';
 import { NgOptimizedImage } from '@angular/common';
 
@@ -7,7 +7,8 @@ import { NgOptimizedImage } from '@angular/common';
     templateUrl: './sub-hero-logo.component.html',
     styleUrls: ['./sub-hero-logo.component.scss'],
     standalone: true,
-    imports: [NgOptimizedImage]
+    imports: [NgOptimizedImage],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SubHeroLogoComponent {
   protected readonly logoUrl = '../../assets/images/badge.png';

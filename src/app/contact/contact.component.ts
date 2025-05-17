@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy } from "@angular/core";
+import { Component, inject, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from "@angular/core";
 import { ContactForm } from "../models/contact-form";
 import { ContactService } from "../services/contact.service";
 import { catchError, takeUntil, tap } from "rxjs/operators";
@@ -16,6 +16,7 @@ import { TwoPanelLayoutComponent } from "../shared-ui/two-panel-layout/two-panel
   templateUrl: "./contact.component.html",
   styleUrls: ["./contact.component.scss"],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     TwoPanelLayoutComponent,
     NgOptimizedImage,
@@ -28,6 +29,7 @@ import { TwoPanelLayoutComponent } from "../shared-ui/two-panel-layout/two-panel
 export class ContactComponent implements OnDestroy {
   private readonly logger = inject(LOGGER_TOKEN);
   private readonly contactService = inject(ContactService);
+  private readonly cd = inject(ChangeDetectorRef);
 
   model: ContactForm = {
     fullName: "",
@@ -62,7 +64,7 @@ export class ContactComponent implements OnDestroy {
         }),
         takeUntil(this.destroyed$)
       )
-      .subscribe();
+      .subscribe(() => this.cd.markForCheck());
   }
 
   clearForm() {

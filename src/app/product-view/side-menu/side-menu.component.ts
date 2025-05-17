@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { ROUTE_TOKENS } from '../../models/route-tokens';
 import { RouterLinkActive, RouterLink } from '@angular/router';
@@ -9,6 +9,7 @@ import { NgOptimizedImage, AsyncPipe } from '@angular/common';
     templateUrl: './side-menu.component.html',
     styleUrls: ['./side-menu.component.scss'],
     standalone: true,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
     NgOptimizedImage,
     RouterLink,

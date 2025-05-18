@@ -1,4 +1,4 @@
-import { Injectable, inject, signal, computed } from '@angular/core';
+import { Injectable, inject, signal, computed, linkedSignal } from '@angular/core';
 import { Category } from '../models/category';
 import { map, tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
@@ -12,7 +12,7 @@ export class ProductService {
   private readonly route = inject(ActivatedRoute);
   private readonly productHttpService = inject(ProductHttpService);
 
-  readonly selectedCategory = signal<string>(Category.ALL);
+  readonly selectedCategory = linkedSignal<string>(() => Category.ALL);
   setSelectedCategory(category: string): void {
     this.selectedCategory.set(category);
   }

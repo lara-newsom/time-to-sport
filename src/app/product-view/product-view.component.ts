@@ -1,25 +1,27 @@
 import {
   Component,
   inject,
-  Input,
   OnDestroy,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   afterNextRender,
-} from "@angular/core";
-import { ProductService } from "../services/product.service";
-import { NavigationEnd, Router, RouterOutlet } from "@angular/router";
-import { filter, takeUntil } from "rxjs/operators";
-import { LOGGER_TOKEN } from "../tokens/logger-token";
-import { ReplaySubject } from "rxjs";
-import { SideMenuComponent } from "./side-menu/side-menu.component";
-import { TableViewComponent } from "./table-view/table-view.component";
-import { MatSlideToggle } from "@angular/material/slide-toggle";
+  input,
+  effect,
+} from '@angular/core';
+import { ProductService } from '../services/product.service';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { filter, takeUntil } from 'rxjs/operators';
+import { LOGGER_TOKEN } from '../tokens/logger-token';
+import { ReplaySubject } from 'rxjs';
+import { SideMenuComponent } from './side-menu/side-menu.component';
+import { TableViewComponent } from './table-view/table-view.component';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { Category } from '../models/category';
 
 @Component({
-  selector: "app-product-view",
-  templateUrl: "./product-view.component.html",
-  styleUrls: ["./product-view.component.scss"],
+  selector: 'app-product-view',
+  templateUrl: './product-view.component.html',
+  styleUrls: ['./product-view.component.scss'],
   imports: [
     MatSlideToggle,
     TableViewComponent,
@@ -29,9 +31,7 @@ import { MatSlideToggle } from "@angular/material/slide-toggle";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductViewComponent implements OnDestroy {
-  @Input() set categoryId(val: string) {
-    this.productService.setSelectedCategory(val);
-  }
+  readonly categoryId = input<string>(Category.ALL);
   private readonly logger = inject(LOGGER_TOKEN);
   protected readonly productService = inject(ProductService);
   private readonly router = inject(Router);
@@ -40,6 +40,9 @@ export class ProductViewComponent implements OnDestroy {
   private readonly destroyed$ = new ReplaySubject<void>(1);
 
   constructor() {
+    effect(() => {
+      this.productService.setSelectedCategory(this.categoryId());
+    })
     afterNextRender(() => {
       this.router.events
         .pipe(
@@ -47,7 +50,7 @@ export class ProductViewComponent implements OnDestroy {
           takeUntil(this.destroyed$)
         )
         .subscribe(() => {
-          const content = document.querySelector<HTMLElement>("#productDetail");
+          const content = document.querySelector<HTMLElement>('#productDetail');
           if (content) {
             content.focus();
           }

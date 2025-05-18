@@ -8,12 +8,12 @@
     >
     <ng-container banner>{{ bannerText }} </ng-container>
   </sub-hero-logo>
-  @defer(on viewport){
+  @defer(hydrate on viewport){
     <app-featured-product />
   } @placeholder {
     <p>Loading...</p>
   }
-  @defer (on viewport){
+  @defer (hydrate on viewport){
     <app-sub-section />
   } @placeholder {
     <p>Loading...</p>

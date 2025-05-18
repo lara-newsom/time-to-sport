@@ -2,6 +2,7 @@ import { provideZoneChangeDetection } from '@angular/core';
 import {
   provideClientHydration,
   withEventReplay,
+  withIncrementalHydration,
 } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
@@ -18,6 +19,9 @@ export const appConfig = {
     provideRouter(routes, withComponentInputBinding()),
     provideAnimations(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideClientHydration(withEventReplay()),
+    provideClientHydration(
+        withEventReplay(),
+        withIncrementalHydration(),
+    ),
   ],
 };

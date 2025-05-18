@@ -9,13 +9,12 @@ import { HeroSectionComponent } from '../shared-ui/hero-section/hero-section.com
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss', '../featured-product/shared-featured-product-styles.scss',],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         HeroSectionComponent,
         SubHeroLogoComponent,
         FeaturedProductComponent,
         SubSectionComponent,
-    ],
+    ]
 })
 export class HomeComponent {
   readonly homeImageUrl = '../../assets/images/heros/hero-5.jpg';

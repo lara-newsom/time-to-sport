@@ -16,17 +16,16 @@ import { TableViewComponent } from './table-view/table-view.component';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 
 @Component({
-  selector: 'app-product-view',
-  templateUrl: './product-view.component.html',
-  styleUrls: ['./product-view.component.scss'],
-  standalone: true,
-  imports: [
-    MatSlideToggle,
-    TableViewComponent,
-    SideMenuComponent,
-    RouterOutlet,
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-product-view',
+    templateUrl: './product-view.component.html',
+    styleUrls: ['./product-view.component.scss'],
+    imports: [
+        MatSlideToggle,
+        TableViewComponent,
+        SideMenuComponent,
+        RouterOutlet,
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductViewComponent implements OnDestroy {
   @Input() set categoryId(val: string) {

@@ -15,7 +15,6 @@ import { HeaderComponent } from './header/header.component';
             useClass: LoggerService,
         }
     ],
-    standalone: true,
     imports: [HeaderComponent, RouterOutlet],
     changeDetection: ChangeDetectionStrategy.OnPush
 })

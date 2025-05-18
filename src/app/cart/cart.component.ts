@@ -18,21 +18,20 @@ import { TwoPanelLayoutComponent } from '../shared-ui/two-panel-layout/two-panel
 
 
 @Component({
-  standalone: true,
-  imports: [
-    CurrencyPipe,
-    FormsModule,
-    CustomBorderButtonDirective,
-    MatProgressSpinnerModule,
-    NgOptimizedImage,
-    RouterLink,
-    AddToCartButtonComponent, 
-    TwoPanelLayoutComponent,
-],
-  selector: 'app-cart',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        CurrencyPipe,
+        FormsModule,
+        CustomBorderButtonDirective,
+        MatProgressSpinnerModule,
+        NgOptimizedImage,
+        RouterLink,
+        AddToCartButtonComponent,
+        TwoPanelLayoutComponent,
+    ],
+    selector: 'app-cart',
+    templateUrl: './cart.component.html',
+    styleUrls: ['./cart.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CartComponent implements OnDestroy {
   protected readonly cartService = inject(CartService);

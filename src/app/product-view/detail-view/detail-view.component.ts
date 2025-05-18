@@ -5,16 +5,15 @@ import { AddToCartButtonComponent } from 'src/app/shared-ui/add-to-cart-button/a
 
 
 @Component({
-  standalone: true,
-  imports: [
-    NgOptimizedImage,
-    CurrencyPipe,
-    AddToCartButtonComponent
-],
-  selector: 'app-detail-view',
-  templateUrl: './detail-view.component.html',
-  styleUrls: ['./detail-view.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    imports: [
+        NgOptimizedImage,
+        CurrencyPipe,
+        AddToCartButtonComponent
+    ],
+    selector: 'app-detail-view',
+    templateUrl: './detail-view.component.html',
+    styleUrls: ['./detail-view.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DetailViewComponent {
   protected readonly cartService = inject(CartService);

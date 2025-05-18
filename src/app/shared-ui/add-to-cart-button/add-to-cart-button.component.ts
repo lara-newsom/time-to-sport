@@ -10,12 +10,11 @@ import { CartService } from '../../services/cart.service';
 import { CustomButtonDirective } from '../custom-button.directive';
 
 @Component({
-  selector: 'app-add-to-cart-button',
-  templateUrl: './add-to-cart-button.component.html',
-  styleUrls: ['./add-to-cart-button.component.scss'],
-  standalone: true,
-  imports: [CustomButtonDirective],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-add-to-cart-button',
+    templateUrl: './add-to-cart-button.component.html',
+    styleUrls: ['./add-to-cart-button.component.scss'],
+    imports: [CustomButtonDirective],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddToCartButtonComponent {
   private readonly cartService = inject(CartService);

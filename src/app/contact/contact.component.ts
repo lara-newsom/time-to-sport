@@ -12,19 +12,18 @@ import { NgOptimizedImage } from "@angular/common";
 import { TwoPanelLayoutComponent } from "../shared-ui/two-panel-layout/two-panel-layout.component";
 
 @Component({
-  selector: "app-contact",
-  templateUrl: "./contact.component.html",
-  styleUrls: ["./contact.component.scss"],
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    TwoPanelLayoutComponent,
-    NgOptimizedImage,
-    FormsModule,
-    CustomButtonDirective,
-    CustomBorderButtonDirective,
-    MatProgressSpinner
-],
+    selector: "app-contact",
+    templateUrl: "./contact.component.html",
+    styleUrls: ["./contact.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        TwoPanelLayoutComponent,
+        NgOptimizedImage,
+        FormsModule,
+        CustomButtonDirective,
+        CustomBorderButtonDirective,
+        MatProgressSpinner
+    ]
 })
 export class ContactComponent implements OnDestroy {
   private readonly logger = inject(LOGGER_TOKEN);

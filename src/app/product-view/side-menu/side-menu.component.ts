@@ -5,12 +5,11 @@ import { RouterLinkActive, RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 
 @Component({
-  selector: 'app-side-menu',
-  templateUrl: './side-menu.component.html',
-  styleUrls: ['./side-menu.component.scss'],
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgOptimizedImage, RouterLink, RouterLinkActive],
+    selector: 'app-side-menu',
+    templateUrl: './side-menu.component.html',
+    styleUrls: ['./side-menu.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [NgOptimizedImage, RouterLink, RouterLinkActive]
 })
 export class SideMenuComponent {
   protected readonly productService = inject(ProductService);

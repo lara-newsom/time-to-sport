@@ -6,7 +6,6 @@ import { NgOptimizedImage } from '@angular/common';
     selector: 'sub-hero-logo',
     templateUrl: './sub-hero-logo.component.html',
     styleUrls: ['./sub-hero-logo.component.scss'],
-    standalone: true,
     imports: [NgOptimizedImage],
     changeDetection: ChangeDetectionStrategy.OnPush
 })

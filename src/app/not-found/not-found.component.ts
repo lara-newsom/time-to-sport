@@ -5,9 +5,8 @@ import { HeroSectionComponent } from '../shared-ui/hero-section/hero-section.com
 @Component({
     selector: 'app-not-found',
     templateUrl: './not-found.component.html',
-    standalone: true,
     imports: [HeroSectionComponent, SubHeroLogoComponent],
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NotFoundComponent {
 

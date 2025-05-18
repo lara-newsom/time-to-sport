@@ -11,13 +11,12 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
-    standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
-    RouterLink,
-    NgOptimizedImage,
-    RouterLinkActive,
-],
+        RouterLink,
+        NgOptimizedImage,
+        RouterLinkActive,
+    ]
 })
 export class HeaderComponent {
   readonly BUSINESS_NAME = BUSINESS_NAME;

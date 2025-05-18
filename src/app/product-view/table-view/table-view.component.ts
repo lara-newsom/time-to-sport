@@ -12,17 +12,16 @@ type SortableKeys = Pick<
 >;
 
 @Component({
-  selector: 'app-table-view',
-  templateUrl: './table-view.component.html',
-  styleUrls: ['./table-view.component.scss'],
-  standalone: true,
-  imports: [
-    NgOptimizedImage,
-    UpperCasePipe,
-    CurrencyPipe,
-    AddToCartButtonComponent
-],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-table-view',
+    templateUrl: './table-view.component.html',
+    styleUrls: ['./table-view.component.scss'],
+    imports: [
+        NgOptimizedImage,
+        UpperCasePipe,
+        CurrencyPipe,
+        AddToCartButtonComponent
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableViewComponent {
   readonly BUSINESS_NAME = BUSINESS_NAME;
